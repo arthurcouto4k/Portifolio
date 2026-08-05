@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <h1>🛍️ Catálogo de Produtos</h1>
+
+        <span class="badge" id="countBadge">0 produtos</span>
+
+        <a href="../../index.html" class="back-link">
+            ← Voltar ao portfólio
+        </a>
+    </div>
+</header>
+
+    <main class="container">
+
+        <section class="toolbar">
+            <input
+                type="text"
+                id="searchInput"
+                class="search"
+                placeholder="Buscar produto..."
+                aria-label="Buscar produto"
+            >
+            <div class="filters" role="group" aria-label="Filtrar por categoria">
+                <button class="filter-btn active" data-cat="all">Todos</button>
+                <button class="filter-btn" data-cat="eletronicos">Eletrônicos</button>
+                <button class="filter-btn" data-cat="roupas">Roupas</button>
+                <button class="filter-btn" data-cat="livros">Livros</button>
+                <button class="filter-btn" data-cat="casa">Casa</button>
+            </div>
+        </section>
+
+        <div class="product-grid" id="productGrid" role="list" aria-live="polite"></div>
+
+        <p class="empty-msg" id="emptyMsg" hidden>Nenhum produto encontrado.</p>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

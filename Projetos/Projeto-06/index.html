@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Gestão Acadêmica | Projeto 06 — Arthur Ramos Couto</title>
+    <meta name="description" content="Projeto integrador: front-end de gestão acadêmica com alunos, cursos e boletim, consumindo API em PHP/MySQL e relatórios em Python/C#.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+    <header class="app-header">
+        <div class="app-header-inner">
+            <a href="../../index.html#projetos" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+                Voltar ao portfólio
+            </a>
+
+            <span class="app-logo">Gestão<span>Acadêmica</span></span>
+
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="conteudo" class="container">
+
+        <!-- ============ INTRO DO PROJETO ============ -->
+        <section class="project-intro">
+            <span class="eyebrow">Projeto 06 · Projeto integrador</span>
+            <h1>Plataforma de Gestão Acadêmica</h1>
+            <p class="lede">
+                Painel para gerenciar alunos, cursos e boletins, com cálculo automático de média e
+                situação. Esta tela é o front-end (HTML5/CSS3/JS puro) com dados de demonstração em
+                memória; ele foi feito para consumir a API REST em PHP/MySQL incluída no projeto
+                (pasta <code>backend/</code>), que também alimenta o script de relatórios em Python e o
+                módulo desktop em C#.
+            </p>
+            <div class="tags">
+                <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Python</span><span>C#</span>
+            </div>
+        </section>
+
+        <!-- ============ DASHBOARD / KPIs ============ -->
+        <section class="dashboard" aria-label="Indicadores gerais">
+            <div class="stat-card">
+                <span class="stat-label">Alunos matriculados</span>
+                <span class="stat-value" id="statAlunos">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Cursos ativos</span>
+                <span class="stat-value" id="statCursos">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Média geral da turma</span>
+                <span class="stat-value" id="statMedia">0.0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Taxa de aprovação</span>
+                <span class="stat-value" id="statAprovacao">0%</span>
+            </div>
+        </section>
+
+        <!-- ============ TABS ============ -->
+        <section class="panel">
+            <div class="tabs" role="tablist" aria-label="Seções do sistema">
+                <button class="tab-btn active" data-tab="alunos" role="tab" aria-selected="true" type="button">Alunos</button>
+                <button class="tab-btn" data-tab="cursos" role="tab" aria-selected="false" type="button">Cursos</button>
+                <button class="tab-btn" data-tab="boletim" role="tab" aria-selected="false" type="button">Boletim</button>
+                <button class="tab-btn" data-tab="relatorios" role="tab" aria-selected="false" type="button">Relatórios</button>
+            </div>
+
+            <!-- ---- ALUNOS ---- -->
+            <div class="tab-panel active" id="tab-alunos" role="tabpanel">
+                <div class="panel-toolbar">
+                    <input type="search" id="buscaAluno" class="input" placeholder="Buscar aluno por nome ou e-mail...">
+                    <button class="btn small" id="btnNovoAluno" type="button">+ Novo aluno</button>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table" id="tabelaAlunos">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Curso</th>
+                                <th>Média</th>
+                                <th>Situação</th>
+                                <th>Status</th>
+                                <th aria-label="Ações"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabelaAlunos"></tbody>
+                    </table>
+                </div>
+                <p class="empty-state" id="alunosVazio" hidden>Nenhum aluno encontrado.</p>
+            </div>
+
+            <!-- ---- CURSOS ---- -->
+            <div class="tab-panel" id="tab-cursos" role="tabpanel">
+                <div class="panel-toolbar">
+                    <p class="panel-hint">Cursos cadastrados na plataforma e número de alunos matriculados em cada um.</p>
+                    <button class="btn small" id="btnNovoCurso" type="button">+ Novo curso</button>
+                </div>
+                <div class="course-grid" id="gradeCursos"></div>
+            </div>
+
+            <!-- ---- BOLETIM ---- -->
+            <div class="tab-panel" id="tab-boletim" role="tabpanel">
+                <div class="panel-toolbar">
+                    <label class="select-label" for="selectAlunoBoletim">Aluno</label>
+                    <select id="selectAlunoBoletim" class="input"></select>
+                    <button class="btn small outline" id="btnLancarNota" type="button">+ Lançar nota</button>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table" id="tabelaBoletim">
+                        <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>Nota</th>
+                                <th aria-label="Ações"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabelaBoletim"></tbody>
+                    </table>
+                </div>
+
+                <div class="boletim-resumo" id="boletimResumo"></div>
+            </div>
+
+            <!-- ---- RELATÓRIOS ---- -->
+            <div class="tab-panel" id="tab-relatorios" role="tabpanel">
+                <p class="panel-hint">
+                    Em produção, este relatório é gerado pelo script <code>scripts/relatorio_desempenho.py</code>
+                    (lendo direto do MySQL) ou pelo módulo desktop em C#. Aqui, o botão abaixo gera a mesma
+                    estrutura de relatório em CSV a partir dos dados desta página, para demonstração.
+                </p>
+                <button class="btn" id="btnGerarRelatorio" type="button">Gerar relatório de desempenho (.csv)</button>
+            </div>
+        </section>
+
+        <section class="stack-note">
+            <h2 class="section-title-sm">Sobre a stack deste projeto</h2>
+            <ul class="stack-list">
+                <li><strong>Front-end (aqui):</strong> HTML5, CSS3 e JavaScript puro, sem frameworks.</li>
+                <li><strong>Back-end:</strong> API REST em PHP consultando um banco MySQL — ver pasta <code>backend/</code>.</li>
+                <li><strong>Automação de relatórios:</strong> script Python que lê o banco e exporta CSV/resumo — ver pasta <code>scripts/</code>.</li>
+                <li><strong>Módulo desktop:</strong> aplicação complementar em C# para consulta rápida de alunos em situação crítica — ver pasta <code>desktop/</code>.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Arthur Ramos Couto. Projeto 06 — Plataforma de Gestão Acadêmica.</p>
+    </footer>
+
+    <!-- ============ MODAL ALUNO ============ -->
+    <div class="modal-overlay" id="modalAluno" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalAlunoTitulo">
+            <h3 id="modalAlunoTitulo">Novo aluno</h3>
+            <form id="formAluno">
+                <input type="hidden" id="alunoId">
+                <label class="field">
+                    <span>Nome completo</span>
+                    <input type="text" id="alunoNome" class="input" required>
+                </label>
+                <label class="field">
+                    <span>E-mail</span>
+                    <input type="email" id="alunoEmail" class="input" required>
+                </label>
+                <label class="field">
+                    <span>Curso</span>
+                    <select id="alunoCurso" class="input" required></select>
+                </label>
+                <label class="field">
+                    <span>Status</span>
+                    <select id="alunoStatus" class="input">
+                        <option value="ativo">Ativo</option>
+                        <option value="trancado">Trancado</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                </label>
+                <div class="modal-actions">
+                    <button type="button" class="btn small outline" data-close-modal="modalAluno">Cancelar</button>
+                    <button type="submit" class="btn small">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ MODAL CURSO ============ -->
+    <div class="modal-overlay" id="modalCurso" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalCursoTitulo">
+            <h3 id="modalCursoTitulo">Novo curso</h3>
+            <form id="formCurso">
+                <label class="field">
+                    <span>Nome do curso</span>
+                    <input type="text" id="cursoNome" class="input" required>
+                </label>
+                <label class="field">
+                    <span>Carga horária (h)</span>
+                    <input type="number" id="cursoCarga" class="input" min="1" required>
+                </label>
+                <label class="field">
+                    <span>Professor responsável</span>
+                    <input type="text" id="cursoProfessor" class="input" required>
+                </label>
+                <div class="modal-actions">
+                    <button type="button" class="btn small outline" data-close-modal="modalCurso">Cancelar</button>
+                    <button type="submit" class="btn small">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ MODAL NOTA ============ -->
+    <div class="modal-overlay" id="modalNota" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalNotaTitulo">
+            <h3 id="modalNotaTitulo">Lançar nota</h3>
+            <form id="formNota">
+                <label class="field">
+                    <span>Disciplina</span>
+                    <input type="text" id="notaDisciplina" class="input" required>
+                </label>
+                <label class="field">
+                    <span>Nota (0 a 10)</span>
+                    <input type="number" id="notaValor" class="input" min="0" max="10" step="0.1" required>
+                </label>
+                <div class="modal-actions">
+                    <button type="button" class="btn small outline" data-close-modal="modalNota">Cancelar</button>
+                    <button type="submit" class="btn small">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

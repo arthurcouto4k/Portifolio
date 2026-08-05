@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Reservas | Arthur Ramos Couto</title>
+  <meta name="description" content="Sistema de reservas com painel administrativo — Projeto 04 do portfólio de Arthur Ramos Couto.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Tokens ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0e14;
+      --surface:   #10151f;
+      --surface2:  #161d2b;
+      --border:    #1e2a3a;
+      --accent:    #7dd3c0;
+      --accent2:   #f0b86e;
+      --text:      #cdd9e5;
+      --muted:     #6b7e94;
+      --danger:    #f87171;
+      --success:   #4ade80;
+      --radius:    10px;
+      --shadow:    0 4px 24px rgba(0,0,0,.45);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); text-decoration: none; letter-spacing: -.5px; }
+    .logo span { color: var(--text); }
+    .back-link { font-size: .85rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: .4rem; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Layout ─────────────────────────────────────── */
+    .app { display: flex; flex: 1; min-height: 0; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .sidebar-label { font-size: .7rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; padding: .5rem .75rem .25rem; }
+    .nav-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .6rem .75rem; border-radius: var(--radius);
+      font-size: .9rem; color: var(--muted);
+      cursor: pointer; border: none; background: none;
+      width: 100%; text-align: left; transition: all .2s;
+    }
+    .nav-item:hover { background: var(--surface2); color: var(--text); }
+    .nav-item.active { background: rgba(125,211,192,.12); color: var(--accent); }
+    .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Main */
+    .main { flex: 1; padding: 2rem; overflow-y: auto; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── Typography ─────────────────────────────────── */
+    .page-title { font-size: 1.4rem; font-weight: 700; margin-bottom: .4rem; }
+    .page-sub   { color: var(--muted); font-size: .9rem; margin-bottom: 1.5rem; }
+
+    /* ── Cards / Stats ──────────────────────────────── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+    }
+    .stat-value { font-size: 2rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
+    .stat-card.accent  .stat-value { color: var(--accent); }
+    .stat-card.accent2 .stat-value { color: var(--accent2); }
+    .stat-card.danger  .stat-value { color: var(--danger); }
+    .stat-card.success .stat-value { color: var(--success); }
+
+    /* ── Table ──────────────────────────────────────── */
+    .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th { background: var(--surface2); padding: .75rem 1rem; text-align: left; color: var(--muted); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .5px; }
+    td { padding: .75rem 1rem; border-top: 1px solid var(--border); vertical-align: middle; }
+    tr:hover td { background: rgba(255,255,255,.02); }
+
+    .badge {
+      display: inline-block; padding: .2rem .6rem; border-radius: 999px; font-size: .75rem; font-weight: 600;
+    }
+    .badge-pending   { background: rgba(240,184,110,.15); color: var(--accent2); }
+    .badge-confirmed { background: rgba(74,222,128,.15);  color: var(--success); }
+    .badge-cancelled { background: rgba(248,113,113,.15); color: var(--danger); }
+
+    /* ── Form ───────────────────────────────────────── */
+    .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; max-width: 600px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group.full { grid-column: 1/-1; }
+    label { font-size: .82rem; color: var(--muted); font-weight: 500; }
+    input, select, textarea {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .6rem .9rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    select option { background: var(--surface2); }
+    textarea { resize: vertical; min-height: 80px; }
+
+    /* ── Buttons ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .6rem 1.2rem; border-radius: 8px; font-size: .88rem;
+      font-weight: 600; cursor: pointer; border: none;
+      transition: opacity .2s, transform .1s;
+    }
+    .btn:hover { opacity: .85; }
+    .btn:active { transform: scale(.98); }
+    .btn-primary { background: var(--accent); color: #0a0e14; }
+    .btn-danger  { background: var(--danger); color: #fff; }
+    .btn-ghost   { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .btn-sm      { padding: .35rem .75rem; font-size: .8rem; }
+
+    /* ── Toast ──────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: .9rem 1.3rem;
+      font-size: .88rem; box-shadow: var(--shadow);
+      transform: translateY(120%); opacity: 0;
+      transition: all .3s; z-index: 999;
+      max-width: 320px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { border-color: var(--success); color: var(--success); }
+    #toast.error   { border-color: var(--danger);  color: var(--danger); }
+
+    /* ── Modal ──────────────────────────────────────── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.7); z-index: 200;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem; width: 100%; max-width: 420px;
+      box-shadow: var(--shadow);
+    }
+    .modal h3 { margin-bottom: .5rem; }
+    .modal p  { color: var(--muted); font-size: .9rem; margin-bottom: 1.25rem; }
+    .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Empty state ─────────────────────────────────── */
+    .empty { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+    .empty svg { width: 48px; height: 48px; opacity: .3; margin-bottom: 1rem; }
+
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: .75rem; }
+    .filters-inline { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .filter-chip {
+      padding: .3rem .85rem; border-radius: 999px; font-size: .8rem;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--muted); cursor: pointer; transition: all .2s;
+    }
+    .filter-chip.active { background: var(--accent); border-color: var(--accent); color: #0a0e14; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../../index.html" class="logo">ARC<span>.dev</span></a>
+  <a href="../../index.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Voltar ao portfólio
+  </a>
+</header>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <span class="sidebar-label">Menu</span>
+    <button class="nav-item active" data-page="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-item" data-page="nova">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+      Nova Reserva
+    </button>
+    <button class="nav-item" data-page="reservas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+      Reservas
+    </button>
+    <button class="nav-item" data-page="espacos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Espaços
+    </button>
+  </aside>
+
+  <main class="main">
+
+    <!-- Dashboard -->
+    <div class="page active" id="page-dashboard">
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-sub">Visão geral do sistema de reservas.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card accent">
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">Total de Reservas</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-value" id="stat-confirmed">0</div>
+          <div class="stat-label">Confirmadas</div>
+        </div>
+        <div class="stat-card accent2">
+          <div class="stat-value" id="stat-pending">0</div>
+          <div class="stat-label">Pendentes</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="stat-value" id="stat-cancelled">0</div>
+          <div class="stat-label">Canceladas</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2 style="font-size:1rem;font-weight:600;">Próximas Reservas</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th><th>Espaço</th><th>Data</th><th>Horário</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dash-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Nova Reserva -->
+    <div class="page" id="page-nova">
+      <h1 class="page-title">Nova Reserva</h1>
+      <p class="page-sub">Preencha os dados abaixo para registrar uma nova reserva.</p>
+
+      <div class="form-card">
+        <div class="form-grid" id="reserva-form">
+          <div class="form-group">
+            <label for="f-nome">Nome do cliente *</label>
+            <input type="text" id="f-nome" placeholder="Ex: Maria Silva">
+          </div>
+          <div class="form-group">
+            <label for="f-email">E-mail</label>
+            <input type="email" id="f-email" placeholder="cliente@email.com">
+          </div>
+          <div class="form-group">
+            <label for="f-espaco">Espaço *</label>
+            <select id="f-espaco">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-pessoas">Nº de pessoas</label>
+            <input type="number" id="f-pessoas" min="1" max="500" placeholder="1">
+          </div>
+          <div class="form-group">
+            <label for="f-data">Data *</label>
+            <input type="date" id="f-data">
+          </div>
+          <div class="form-group">
+            <label for="f-hora-ini">Hora início *</label>
+            <input type="time" id="f-hora-ini" value="09:00">
+          </div>
+          <div class="form-group">
+            <label for="f-hora-fim">Hora fim *</label>
+            <input type="time" id="f-hora-fim" value="11:00">
+          </div>
+          <div class="form-group">
+            <label for="f-status">Status</label>
+            <select id="f-status">
+              <option value="pending">Pendente</option>
+              <option value="confirmed">Confirmada</option>
+              <option value="cancelled">Cancelada</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="f-obs">Observações</label>
+            <textarea id="f-obs" placeholder="Informações adicionais..."></textarea>
+          </div>
+          <div class="form-group full" style="display:flex;gap:.75rem;justify-content:flex-end;">
+            <button class="btn btn-ghost" onclick="resetForm()">Limpar</button>
+            <button class="btn btn-primary" onclick="saveReserva()">Salvar Reserva</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservas -->
+    <div class="page" id="page-reservas">
+      <div class="section-header">
+        <div>
+          <h1 class="page-title">Reservas</h1>
+          <p class="page-sub" style="margin-bottom:0">Gerencie todas as reservas cadastradas.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="goToPage('nova')">+ Nova</button>
+      </div>
+
+      <div style="margin-bottom:1rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+        <button class="filter-chip active" data-filter="all">Todas</button>
+        <button class="filter-chip" data-filter="pending">Pendentes</button>
+        <button class="filter-chip" data-filter="confirmed">Confirmadas</button>
+        <button class="filter-chip" data-filter="cancelled">Canceladas</button>
+        <input type="text" id="search-input" placeholder="Buscar cliente ou espaço..." style="margin-left:auto;width:220px;padding:.4rem .8rem;font-size:.85rem;">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Cliente</th><th>Espaço</th><th>Data</th><th>Horário</th><th>Status</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="reservas-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Espaços -->
+    <div class="page" id="page-espacos">
+      <div class="section-header">
+        <div>
+          <h1 class="page-title">Espaços</h1>
+          <p class="page-sub" style="margin-bottom:0">Gerencie os espaços disponíveis para reserva.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="addEspaco()">+ Novo Espaço</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Nome</th><th>Capacidade</th><th>Localização</th><th>Ações</th></tr></thead>
+          <tbody id="espacos-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal confirmação exclusão -->
+<div class="modal-overlay" id="modal-delete">
+  <div class="modal">
+    <h3>Excluir reserva?</h3>
+    <p>Essa ação não pode ser desfeita. A reserva será removida permanentemente.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ── Dados iniciais ─────────────────────────────── */
+const ESPACOS_KEY  = 'res-espacos';
+const RESERVAS_KEY = 'res-reservas';
+
+const DEFAULT_ESPACOS = [
+  { id: 1, nome: 'Sala de Reuniões A', capacidade: 10, local: 'Bloco 1 — 2º andar' },
+  { id: 2, nome: 'Auditório Principal',  capacidade: 150, local: 'Bloco Central — Térreo' },
+  { id: 3, nome: 'Sala de Treinamento', capacidade: 30,  local: 'Bloco 2 — 1º andar' },
+  { id: 4, nome: 'Espaço Colaborativo', capacidade: 20,  local: 'Bloco 3 — Térreo' },
+];
+
+const DEFAULT_RESERVAS = [
+  { id: 1, nome: 'Carlos Andrade',  email: 'carlos@email.com', espacoId: 1, pessoas: 6,  data: '2026-07-10', horaIni: '09:00', horaFim: '11:00', status: 'confirmed', obs: '' },
+  { id: 2, nome: 'Beatriz Lima',    email: 'bia@email.com',    espacoId: 2, pessoas: 80, data: '2026-07-12', horaIni: '14:00', horaFim: '17:00', status: 'pending',   obs: 'Necessita projetor.' },
+  { id: 3, nome: 'Rafael Costa',   email: 'rafael@email.com', espacoId: 3, pessoas: 20, data: '2026-07-08', horaIni: '08:00', horaFim: '10:00', status: 'confirmed', obs: '' },
+  { id: 4, nome: 'Juliana Matos',  email: 'ju@email.com',     espacoId: 4, pessoas: 12, data: '2026-07-15', horaIni: '13:00', horaFim: '15:00', status: 'cancelled', obs: 'Cancelado pelo cliente.' },
+  { id: 5, nome: 'Fernando Nunes', email: 'fer@email.com',    espacoId: 1, pessoas: 8,  data: '2026-07-18', horaIni: '10:00', horaFim: '12:00', status: 'pending',   obs: '' },
+];
+
+/* ── Storage helpers ────────────────────────────── */
+function load(key, def) {
+  try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
+}
+function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+let espacos  = load(ESPACOS_KEY,  DEFAULT_ESPACOS);
+let reservas = load(RESERVAS_KEY, DEFAULT_RESERVAS);
+
+/* ── Navigation ─────────────────────────────────── */
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => goToPage(btn.dataset.page));
+});
+
+function goToPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id)?.classList.add('active');
+  document.querySelector(`[data-page="${id}"]`)?.classList.add('active');
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'reservas')  renderReservas();
+  if (id === 'espacos')   renderEspacos();
+  if (id === 'nova')      populateEspacoSelect();
+}
+
+/* ── Toast ──────────────────────────────────────── */
+let toastTimer;
+function toast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = '', 3000);
+}
+
+/* ── Status helpers ─────────────────────────────── */
+function statusBadge(s) {
+  const map = { pending: ['badge-pending','Pendente'], confirmed: ['badge-confirmed','Confirmada'], cancelled: ['badge-cancelled','Cancelada'] };
+  const [cls, label] = map[s] || ['','—'];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,dd] = d.split('-');
+  return `${dd}/${m}/${y}`;
+}
+
+/* ── Dashboard ──────────────────────────────────── */
+function renderDashboard() {
+  const total     = reservas.length;
+  const confirmed = reservas.filter(r => r.status === 'confirmed').length;
+  const pending   = reservas.filter(r => r.status === 'pending').length;
+  const cancelled = reservas.filter(r => r.status === 'cancelled').length;
+  document.getElementById('stat-total').textContent     = total;
+  document.getElementById('stat-confirmed').textContent = confirmed;
+  document.getElementById('stat-pending').textContent   = pending;
+  document.getElementById('stat-cancelled').textContent = cancelled;
+
+  const upcoming = [...reservas]
+    .filter(r => r.status !== 'cancelled')
+    .sort((a,b) => a.data.localeCompare(b.data))
+    .slice(0,5);
+
+  const tbody = document.getElementById('dash-tbody');
+  tbody.innerHTML = upcoming.length
+    ? upcoming.map(r => {
+        const esp = espacos.find(e => e.id === r.espacoId);
+        return `<tr>
+          <td>${r.nome}</td>
+          <td>${esp?.nome || '—'}</td>
+          <td>${fmtDate(r.data)}</td>
+          <td>${r.horaIni} – ${r.horaFim}</td>
+          <td>${statusBadge(r.status)}</td>
+        </tr>`;
+      }).join('')
+    : '<tr><td colspan="5" class="empty">Nenhuma reserva encontrada.</td></tr>';
+}
+
+/* ── Reservas ────────────────────────────────────── */
+let currentFilter = 'all';
+let searchQuery   = '';
+
+function renderReservas() {
+  let data = [...reservas];
+  if (currentFilter !== 'all') data = data.filter(r => r.status === currentFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    data = data.filter(r => {
+      const esp = espacos.find(e => e.id === r.espacoId);
+      return r.nome.toLowerCase().includes(q) || (esp?.nome || '').toLowerCase().includes(q);
+    });
+  }
+  data.sort((a,b) => b.id - a.id);
+
+  const tbody = document.getElementById('reservas-tbody');
+  tbody.innerHTML = data.length
+    ? data.map(r => {
+        const esp = espacos.find(e => e.id === r.espacoId);
+        return `<tr>
+          <td style="color:var(--muted);font-size:.8rem;">#${r.id}</td>
+          <td><strong>${r.nome}</strong><br><span style="color:var(--muted);font-size:.8rem;">${r.email||''}</span></td>
+          <td>${esp?.nome || '—'}</td>
+          <td>${fmtDate(r.data)}</td>
+          <td>${r.horaIni} – ${r.horaFim}</td>
+          <td>${statusBadge(r.status)}</td>
+          <td>
+            <div style="display:flex;gap:.4rem;">
+              <button class="btn btn-ghost btn-sm" onclick="changeStatus(${r.id})">Status</button>
+              <button class="btn btn-danger btn-sm" onclick="askDelete(${r.id})">✕</button>
+            </div>
+          </td>
+        </tr>`;
+      }).join('')
+    : '<tr><td colspan="7" class="empty">Nenhuma reserva encontrada.</td></tr>';
+}
+
+// Filtros
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentFilter = chip.dataset.filter;
+    renderReservas();
+  });
+});
+
+document.getElementById('search-input').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderReservas();
+});
+
+/* ── Status cycle ───────────────────────────────── */
+function changeStatus(id) {
+  const r = reservas.find(x => x.id === id);
+  if (!r) return;
+  const cycle = { pending: 'confirmed', confirmed: 'cancelled', cancelled: 'pending' };
+  r.status = cycle[r.status];
+  save(RESERVAS_KEY, reservas);
+  renderReservas();
+  renderDashboard();
+  toast('Status atualizado!');
+}
+
+/* ── Delete ─────────────────────────────────────── */
+let deleteTarget = null;
+function askDelete(id)   { deleteTarget = id; document.getElementById('modal-delete').classList.add('open'); }
+function closeModal()    { document.getElementById('modal-delete').classList.remove('open'); deleteTarget = null; }
+function confirmDelete() {
+  reservas = reservas.filter(r => r.id !== deleteTarget);
+  save(RESERVAS_KEY, reservas);
+  closeModal();
+  renderReservas();
+  renderDashboard();
+  toast('Reserva excluída.', 'error');
+}
+
+/* ── Nova Reserva ───────────────────────────────── */
+function populateEspacoSelect() {
+  const sel = document.getElementById('f-espaco');
+  sel.innerHTML = '<option value="">Selecione...</option>' +
+    espacos.map(e => `<option value="${e.id}">${e.nome} (cap. ${e.capacidade})</option>`).join('');
+  // Set min date to today
+  document.getElementById('f-data').min = new Date().toISOString().split('T')[0];
+}
+
+function saveReserva() {
+  const nome    = document.getElementById('f-nome').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const espId   = parseInt(document.getElementById('f-espaco').value);
+  const pessoas = parseInt(document.getElementById('f-pessoas').value) || 1;
+  const data    = document.getElementById('f-data').value;
+  const horaIni = document.getElementById('f-hora-ini').value;
+  const horaFim = document.getElementById('f-hora-fim').value;
+  const status  = document.getElementById('f-status').value;
+  const obs     = document.getElementById('f-obs').value.trim();
+
+  if (!nome)   return toast('Informe o nome do cliente.', 'error');
+  if (!espId)  return toast('Selecione um espaço.', 'error');
+  if (!data)   return toast('Informe a data.', 'error');
+  if (horaIni >= horaFim) return toast('Horário de início deve ser antes do fim.', 'error');
+
+  const newId = reservas.length ? Math.max(...reservas.map(r => r.id)) + 1 : 1;
+  reservas.push({ id: newId, nome, email, espacoId: espId, pessoas, data, horaIni, horaFim, status, obs });
+  save(RESERVAS_KEY, reservas);
+  resetForm();
+  toast('Reserva salva com sucesso!');
+  goToPage('reservas');
+}
+
+function resetForm() {
+  ['f-nome','f-email','f-pessoas','f-obs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-espaco').value = '';
+  document.getElementById('f-status').value = 'pending';
+  document.getElementById('f-hora-ini').value = '09:00';
+  document.getElementById('f-hora-fim').value = '11:00';
+  document.getElementById('f-data').value = '';
+}
+
+/* ── Espaços ─────────────────────────────────────── */
+function renderEspacos() {
+  const tbody = document.getElementById('espacos-tbody');
+  tbody.innerHTML = espacos.map(e => `<tr>
+    <td style="color:var(--muted);font-size:.8rem;">${e.id}</td>
+    <td><strong>${e.nome}</strong></td>
+    <td>${e.capacidade} pessoas</td>
+    <td>${e.local}</td>
+    <td><button class="btn btn-danger btn-sm" onclick="deleteEspaco(${e.id})">✕</button></td>
+  </tr>`).join('');
+}
+
+function addEspaco() {
+  const nome = prompt('Nome do espaço:');
+  if (!nome?.trim()) return;
+  const cap = parseInt(prompt('Capacidade (pessoas):')) || 10;
+  const loc = prompt('Localização:') || '—';
+  const newId = espacos.length ? Math.max(...espacos.map(e => e.id)) + 1 : 1;
+  espacos.push({ id: newId, nome: nome.trim(), capacidade: cap, local: loc });
+  save(ESPACOS_KEY, espacos);
+  renderEspacos();
+  toast('Espaço adicionado!');
+}
+
+function deleteEspaco(id) {
+  if (!confirm('Excluir este espaço?')) return;
+  espacos = espacos.filter(e => e.id !== id);
+  save(ESPACOS_KEY, espacos);
+  renderEspacos();
+  toast('Espaço removido.', 'error');
+}
+
+/* ── Init ───────────────────────────────────────── */
+renderDashboard();
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Tarefas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+    <div class="header-inner">
+        <h1>📋 Painel de Tarefas</h1>
+
+        <button id="themeBtn" class="theme-btn" aria-label="Alternar tema">
+            🌙
+        </button>
+
+        <a href="../../index.html" class="back-link">
+            ← Voltar ao portfólio
+        </a>
+    </div>
+</header>
+
+    <main class="container">
+
+        <!-- Formulário de nova tarefa -->
+        <section class="add-task-form" aria-label="Adicionar tarefa">
+            <input
+                type="text"
+                id="taskInput"
+                class="task-input"
+                placeholder="Nova tarefa… (Enter para adicionar)"
+                maxlength="120"
+                aria-label="Descrição da tarefa"
+            >
+            <select id="prioritySelect" class="priority-select" aria-label="Prioridade">
+                <option value="baixa">🟢 Baixa</option>
+                <option value="media" selected>🟡 Média</option>
+                <option value="alta">🔴 Alta</option>
+            </select>
+            <button id="addBtn" class="btn-add" type="button">+ Adicionar</button>
+        </section>
+
+        <!-- Estatísticas -->
+        <div class="stats" id="stats" aria-live="polite"></div>
+
+        <!-- Colunas Kanban -->
+        <div class="kanban">
+
+            <div class="kanban-col" id="col-todo" data-status="todo">
+                <div class="col-header">
+                    <span class="col-icon">📝</span>
+                    <h2>A fazer</h2>
+                    <span class="col-count" id="count-todo">0</span>
+                </div>
+                <div class="card-list" id="list-todo" role="list" aria-label="Tarefas a fazer"></div>
+            </div>
+
+            <div class="kanban-col" id="col-doing" data-status="doing">
+                <div class="col-header">
+                    <span class="col-icon">⚙️</span>
+                    <h2>Em andamento</h2>
+                    <span class="col-count" id="count-doing">0</span>
+                </div>
+                <div class="card-list" id="list-doing" role="list" aria-label="Tarefas em andamento"></div>
+            </div>
+
+            <div class="kanban-col" id="col-done" data-status="done">
+                <div class="col-header">
+                    <span class="col-icon">✅</span>
+                    <h2>Concluído</h2>
+                    <span class="col-count" id="count-done">0</span>
+                </div>
+                <div class="card-list" id="list-done" role="list" aria-label="Tarefas concluídas"></div>
+            </div>
+
+        </div>
+
+        <button class="btn-clear" id="clearDone" type="button">🗑️ Limpar concluídas</button>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

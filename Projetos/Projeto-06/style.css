@@ -1,0 +1,512 @@
+/* =========================================================
+   PROJETO 06 — PLATAFORMA DE GESTÃO ACADÊMICA
+   Reaproveita os design tokens do portfólio principal para
+   manter a identidade visual, e adiciona os componentes
+   específicos desta tela (dashboard, abas, tabela, modais).
+   ========================================================= */
+:root {
+    --bg-color: #0a0e14;
+    --bg-color-alt: #0d121b;
+    --card-bg: #10151f;
+    --card-border: #1f2733;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b97a8;
+    --accent: #7dd3c0;
+    --accent-strong: #5fc1ab;
+    --accent-soft: rgba(125, 211, 192, 0.12);
+    --accent-2: #f0b86e;
+    --danger: #e8847a;
+    --warning: #f0b86e;
+    --success: #7dd3c0;
+
+    --font-display: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --shadow-soft: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+    --shadow-lift: 0 20px 40px -20px rgba(125, 211, 192, 0.25);
+    --transition: all 0.25s ease;
+}
+
+[data-theme="light"] {
+    --bg-color: #f7f8fa;
+    --bg-color-alt: #ffffff;
+    --card-bg: #ffffff;
+    --card-border: #e2e6ec;
+    --text-primary: #131a24;
+    --text-secondary: #5b6573;
+    --accent: #1f9e85;
+    --accent-strong: #16806b;
+    --accent-soft: rgba(31, 158, 133, 0.1);
+    --accent-2: #c97c1f;
+    --shadow-soft: 0 10px 30px -15px rgba(20, 20, 30, 0.15);
+    --shadow-lift: 0 20px 40px -20px rgba(31, 158, 133, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+code {
+    font-family: var(--font-mono);
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.skip-link {
+    position: absolute;
+    left: -999px;
+    background: var(--accent);
+    color: #06251f;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    z-index: 2000;
+    font-weight: 600;
+}
+.skip-link:focus { left: 16px; top: 16px; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.app-header {
+    background: var(--bg-color-alt);
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    transition: var(--transition);
+}
+.back-link svg { width: 16px; height: 16px; }
+.back-link:hover { color: var(--accent); }
+
+.app-logo {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-right: auto;
+    margin-left: 8px;
+}
+.app-logo span { color: var(--accent); }
+
+.theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle svg { width: 17px; height: 17px; }
+.icon-moon { display: none; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: block; }
+
+/* =========================================================
+   INTRO DO PROJETO
+   ========================================================= */
+.project-intro {
+    padding: 56px 0 36px;
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.project-intro h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0.4rem 0 0.9rem;
+}
+
+.lede {
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin-bottom: 1.2rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tags span {
+    font-family: var(--font-mono);
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+}
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: var(--transition);
+}
+.stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* =========================================================
+   PAINEL / ABAS
+   ========================================================= */
+.panel {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.tabs {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--card-border);
+    background: var(--bg-color-alt);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 16px 22px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-panel { display: none; padding: 1.6rem; }
+.tab-panel.active { display: block; }
+
+.panel-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+}
+
+.panel-hint {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.select-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.input {
+    background: var(--bg-color-alt);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    padding: 9px 14px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+.input:focus { border-color: var(--accent); }
+#buscaAluno { flex: 1; min-width: 200px; }
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+.table-wrap { overflow-x: auto; }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--card-border);
+    vertical-align: middle;
+}
+
+.data-table tbody tr:hover { background: var(--accent-soft); }
+
+.badge {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+.badge.aprovado { background: rgba(125,211,192,0.15); color: var(--accent-strong); }
+.badge.recuperacao { background: rgba(240,184,110,0.18); color: var(--accent-2); }
+.badge.reprovado { background: rgba(232,132,122,0.18); color: var(--danger); }
+.badge.ativo { background: rgba(125,211,192,0.15); color: var(--accent-strong); }
+.badge.trancado { background: rgba(240,184,110,0.18); color: var(--accent-2); }
+.badge.concluido { background: var(--accent-soft); color: var(--accent); }
+
+.row-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+.icon-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
+.icon-btn svg { width: 14px; height: 14px; }
+
+.empty-state {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem 0;
+}
+
+/* =========================================================
+   CURSOS
+   ========================================================= */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.course-card {
+    background: var(--bg-color-alt);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    transition: var(--transition);
+}
+.course-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.course-card h3 { font-size: 1rem; color: var(--accent); margin-bottom: 0.5rem; }
+.course-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
+.course-card .course-count {
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-primary);
+}
+
+/* =========================================================
+   BOLETIM
+   ========================================================= */
+.boletim-resumo {
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+.boletim-resumo strong { color: var(--text-primary); }
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    background: var(--accent);
+    color: #06251f;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    border: 2px solid var(--accent);
+    transition: var(--transition);
+    cursor: pointer;
+    font-size: 0.92rem;
+}
+[data-theme="light"] .btn { color: #fff; }
+.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+.btn.small { padding: 8px 16px; font-size: 0.85rem; }
+
+.btn.outline { background: transparent; color: var(--accent); }
+.btn.outline:hover { color: #06251f; }
+[data-theme="light"] .btn.outline:hover { color: #fff; }
+
+/* =========================================================
+   NOTA SOBRE A STACK
+   ========================================================= */
+.stack-note { padding-top: 8px; }
+
+.section-title-sm {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+}
+
+.stack-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--card-border);
+}
+
+/* =========================================================
+   MODAIS
+   ========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 12, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+.modal-overlay[hidden] { display: none; }
+
+.modal {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 1.8rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--shadow-soft);
+}
+
+.modal h3 { margin-bottom: 1.2rem; font-size: 1.15rem; }
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.field .input { width: 100%; }
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 1.4rem;
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+@media (max-width: 640px) {
+    .app-logo { display: none; }
+    .project-intro h1 { font-size: 1.6rem; }
+    .panel-toolbar { flex-direction: column; align-items: stretch; }
+    .row-actions { justify-content: flex-start; }
+}

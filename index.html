@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthur Ramos Couto | Desenvolvedor em Formação</title>
+    <meta name="description" content="Portfólio de Arthur Ramos Couto, estudante de Engenharia de Software em Belo Horizonte. Projetos, hard skills, soft skills e contato.">
+    <meta name="theme-color" content="#0a0e14">
+
+    <!-- Open Graph / SEO básico -->
+    <meta property="og:title" content="Arthur Ramos Couto | Desenvolvedor em Formação">
+    <meta property="og:description" content="Estudante de Engenharia de Software em busca da primeira oportunidade na área de tecnologia.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Pular para conteúdo: acessibilidade -->
+    <a href="#sobre" class="skip-link">Pular para o conteúdo</a>
+
+    <header>
+        <nav class="navbar" aria-label="Navegação principal">
+            <a href="#sobre" class="logo">ARC<span>.dev</span></a>
+
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+            </button>
+
+            <button class="hamburger" id="hamburger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul id="navMenu" class="nav-menu">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#formacao">Formação</a></li>
+                <li><a href="#competencias">Hard Skills</a></li>
+                <li><a href="#softskills">Soft Skills</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- ============ HERO / SOBRE ============ -->
+        <section id="sobre" class="hero">
+            <div class="hero-wrapper">
+                <div class="hero-content reveal">
+                    <h1>Olá, eu sou <span class="highlight">Arthur Ramos Couto</span></h1>
+                    <p class="subtitle">Estudante de Engenharia de Software &amp; Desenvolvedor em Formação</p>
+                    <p class="description">
+                        Localizado em Belo Horizonte (Betânia), busco minha primeira oportunidade no setor
+                        tecnológico para aplicar meus conhecimentos acadêmicos e técnicos, focando em
+                        crescimento contínuo e inovação.
+                    </p>
+                    <div class="badges">
+                        <span>🎂 04/03/2007</span>
+                        <span>📍 BH - MG</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#projetos" class="btn">Ver projetos</a>
+                        <a href="#contato" class="btn outline">Entrar em contato</a>
+                    </div>
+                </div>
+                <div class="hero-image reveal">
+                    <img src="foto-perfil.jpeg" alt="Foto de Arthur Ramos Couto" width="280" height="280" loading="eager">
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ OBJETIVO ============ -->
+        <section id="objetivo" class="section">
+            <h2 class="section-title reveal">Objetivo Profissional</h2>
+            <div class="card-grid solo">
+                <div class="card reveal">
+                    <p>Atuar na área de tecnologia, aprimorar constantemente meus conhecimentos técnicos e
+                        desenvolver-me profissionalmente em um ambiente colaborativo e desafiador.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PROJETOS (NOVA SEÇÃO) ============ -->
+        <section id="projetos" class="section">
+            <h2 class="section-title reveal">Projetos</h2>
+            <p class="section-subtitle reveal">
+                Uma seleção de projetos de estudo e prática. As imagens são placeholders e os links
+                apontam para "#" — substitua pelas capturas de tela e URLs reais (GitHub, deploy, etc.)
+                de cada projeto.
+            </p>
+
+            <!-- Filtro de categorias -->
+            <div class="filters reveal" role="group" aria-label="Filtrar projetos por categoria">
+                <button class="filter-btn active" data-filter="all" type="button">Todos</button>
+                <button class="filter-btn" data-filter="web" type="button">Web</button>
+                <button class="filter-btn" data-filter="frontend" type="button">Front-end</button>
+                <button class="filter-btn" data-filter="backend" type="button">Back-end</button>
+            </div>
+
+            <div class="project-grid" id="projectGrid">
+
+                <article class="project-card reveal" data-category="web frontend">
+                    <div class="project-thumb">
+                        <img src="https://placehold.co/600x360/10151f/7dd3c0?text=Projeto+01" alt="Thumbnail do projeto Catálogo de Produtos" loading="lazy" width="600" height="360">
+                    </div>
+                    <div class="project-body">
+                        <h3>Catálogo de Produtos</h3>
+                        <p>Aplicação web para listagem e busca de produtos, com filtros dinâmicos e layout responsivo. <em>(Substitua por uma descrição real.)</em></p>
+                        <div class="tags">
+                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projetos/Projeto-01-Catalogo-de-Produtos/index.html" class="btn small" target="_blank" rel="noopener noreferrer">Ver projeto</a>
+                            <a href="#" class="btn small outline" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.23c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-category="frontend">
+                    <div class="project-thumb">
+                        <img src="https://placehold.co/600x360/10151f/f0b86e?text=Projeto+02" alt="Thumbnail do projeto Painel de Tarefas" loading="lazy" width="600" height="360">
+                    </div>
+                    <div class="project-body">
+                        <h3>Painel de Tarefas</h3>
+                        <p>Organizador de tarefas com drag-and-drop, armazenamento local e modo escuro. <em>(Substitua por uma descrição real.)</em></p>
+                        <div class="tags">
+                            <span>JavaScript</span><span>CSS3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projetos/Projeto-02/index.html" class="btn small" target="_blank" rel="noopener noreferrer">Ver projeto</a>
+                            <a href="#" class="btn small outline" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.23c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-category="backend">
+                    <div class="project-thumb">
+                        <img src="https://placehold.co/600x360/10151f/7dd3c0?text=Projeto+03" alt="Thumbnail do projeto API de Cadastro" loading="lazy" width="600" height="360">
+                    </div>
+                    <div class="project-body">
+                        <h3>API de Cadastro de Usuários</h3>
+                        <p>API REST simples para cadastro e autenticação, com persistência em banco relacional. <em>(Substitua por uma descrição real.)</em></p>
+                        <div class="tags">
+                            <span>PHP</span><span>MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projetos/Projeto-03/index.html" class="btn small" target="_blank" rel="noopener noreferrer">Ver projeto</a>
+                            <a href="#" class="btn small outline" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.23c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-category="web backend">
+                    <div class="project-thumb">
+                        <img src="https://placehold.co/600x360/10151f/f0b86e?text=Projeto+04" alt="Thumbnail do projeto Sistema de Reservas" loading="lazy" width="600" height="360">
+                    </div>
+                    <div class="project-body">
+                        <h3>Sistema de Reservas</h3>
+                        <p>Aplicação completa de reservas com painel administrativo e banco de dados próprio. <em>(Substitua por uma descrição real.)</em></p>
+                        <div class="tags">
+                            <span>Python</span><span>SQL</span><span>HTML5</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projetos/Projeto-04/index.html" class="btn small" target="_blank" rel="noopener noreferrer">Ver projeto</a>
+                            <a href="#" class="btn small outline" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.23c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-category="backend">
+                    <div class="project-thumb">
+                        <img src="https://placehold.co/600x360/10151f/7dd3c0?text=Projeto+05" alt="Thumbnail do projeto Controle de Estoque" loading="lazy" width="600" height="360">
+                    </div>
+                    <div class="project-body">
+                        <h3>Controle de Estoque Desktop</h3>
+                        <p>Aplicação desktop em C# (Windows Forms) para gestão de estoque: cadastro de produtos, registro de entradas/saídas e relatório de itens críticos, com persistência dos dados em banco SQL local.</p>
+                        <div class="tags">
+                            <span>C#</span><span>SQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projetos/Projeto-05/index.html" class="btn small" target="_blank" rel="noopener noreferrer">Ver projeto</a>
+                            <a href="#" class="btn small outline" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.23c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-category="web frontend backend">
+                    <div class="project-thumb">
+                        <img src="https://placehold.co/600x360/10151f/f0b86e?text=Projeto+06" alt="Thumbnail do projeto Plataforma de Gestão Acadêmica" loading="lazy" width="600" height="360">
+                    </div>
+                    <div class="project-body">
+                        <h3>Plataforma de Gestão Acadêmica</h3>
+                        <p>Projeto integrador que reúne toda a stack estudada: front-end responsivo em HTML5/CSS3/JavaScript, back-end em PHP com banco MySQL, scripts de automação de relatórios em Python e um módulo desktop complementar em C#.</p>
+                        <div class="tags">
+                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Python</span><span>C#</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Projetos/Projeto-06/index.html" class="btn small" target="_blank" rel="noopener noreferrer">Ver projeto</a>
+                            <a href="#" class="btn small outline" target="_blank" rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.23c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="filter-empty" id="filterEmpty" hidden>Nenhum projeto encontrado para este filtro.</p>
+        </section>
+
+        <!-- ============ FORMAÇÃO ============ -->
+        <section id="formacao" class="section">
+            <h2 class="section-title reveal">Formação Acadêmica</h2>
+            <div class="card-grid">
+                <div class="card reveal">
+                    <h3>Engenharia de Software</h3>
+                    <p class="institution">PUC Minas Coração Eucarístico</p>
+                    <p>2º período — Turno: Noite</p>
+                    <span class="status">2026 – 2029</span>
+                </div>
+                <div class="card reveal">
+                    <h3>Ensino Médio e Técnico em Informática</h3>
+                    <p class="institution">COTEMIG Barroca</p>
+                    <span class="date">2024 – 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ COMPETÊNCIAS ============ -->
+        <section id="competencias" class="section">
+            <h2 class="section-title reveal">Hard Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category reveal">
+                    <h3>Front-End</h3>
+                    <div class="tags">
+                        <span>HTML5</span> <span>CSS3</span> <span>JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3>Back-End &amp; Outros</h3>
+                    <div class="tags">
+                        <span>Python</span> <span>C#</span> <span>PHP</span> <span>SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3>Banco de Dados &amp; Ferramentas</h3>
+                    <div class="tags">
+                        <span>MySQL</span> <span>Wamp Server</span> <span>TerraER</span> <span>Google Workspace</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3>Versionamento de Código</h3>
+                    <div class="tags">
+                        <span>Git</span> <span>GitHub</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tecnologias com ícones -->
+            <div class="tech-icons reveal">
+                <h3 class="tech-heading">Linguagens</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"/><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"/></svg>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"/><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z"/><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"/><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"/><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"/><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"/></svg>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"/></svg>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><linearGradient id="python-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient><linearGradient id="python-b" gradientUnits="userSpaceOnUse" x1="209.474" y1="1098.811" x2="173.62" y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient><path fill="url(#python-a)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z" transform="translate(0 10.26)"/><path fill="url(#python-b)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z" transform="translate(0 10.26)"/></svg>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><path fill="#9B4F96" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"/><path fill="#68217A" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"/><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 51h4.9l-1.2 6.1h3.8l1.2-6.1h4.8l-1.2 6.1h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 6h-4.9l1.2-6h-3.8l-1.2 6h-4.8l1.2-6h-2.4v-4.7H97zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z"/></svg>
+                        <span>C#</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><path fill="#8892BF" d="M0 64c0 18.593 28.654 33.667 64 33.667 35.346 0 64-15.074 64-33.667 0-18.593-28.655-33.667-64-33.667C28.654 30.333 0 45.407 0 64Z"/><path fill="#777bb3" d="M64 95.167c33.965 0 61.5-13.955 61.5-31.167 0-17.214-27.535-31.167-61.5-31.167S2.5 46.786 2.5 64c0 17.212 27.535 31.167 61.5 31.167Z"/><path fill="#fff" d="M34.19 55.826h3.891c3.107 0 4.186.682 4.553 1.089.607.674.723 2.097.331 4.112-.439 2.257-1.253 3.858-2.42 4.756-1.194.92-3.138 1.386-5.773 1.386h-2.786l2.205-11.342zm-13.459-8.1a1.39 1.39 0 0 0-1.364 1.123L12.81 82.588a1.39 1.39 0 0 0 1.363 1.653h7.35a1.39 1.39 0 0 0 1.363-1.124l1.525-7.846h5.151c2.912 0 5.364-.318 7.287-.944 1.977-.642 3.796-1.731 5.406-3.237a16.522 16.522 0 0 0 3.259-4.087c.831-1.487 1.429-3.147 1.775-4.931.86-4.423.161-7.964-2.076-10.524-2.216-2.537-5.698-3.823-10.349-3.823H20.731zm42.895 8.1h3.891c3.107 0 4.186.682 4.552 1.089.607.674.724 2.097.332 4.112-.44 2.257-1.254 3.858-2.421 4.756-1.194.92-3.138 1.386-5.773 1.386h-2.786l2.205-11.342zm-13.46-8.1a1.39 1.39 0 0 0-1.363 1.123l-6.558 33.739a1.39 1.39 0 0 0 1.364 1.653h7.35a1.39 1.39 0 0 0 1.363-1.124l1.525-7.846h5.15c2.912 0 5.365-.318 7.287-.944 1.978-.642 3.797-1.731 5.408-3.237a16.52 16.52 0 0 0 3.258-4.087c.832-1.487 1.428-3.147 1.775-4.931.86-4.423.162-7.964-2.076-10.524-2.216-2.537-5.697-3.823-10.35-3.823H50.166zm42.9 8.1h3.891c3.107 0 4.186.682 4.552 1.089.61.674.724 2.097.333 4.112-.44 2.257-1.254 3.858-2.421 4.756-1.195.92-3.139 1.386-5.773 1.386h-2.786l2.204-11.342zM79.606 47.626a1.39 1.39 0 0 0-1.363 1.123l-6.558 33.739a1.39 1.39 0 0 0 1.364 1.653h7.35a1.39 1.39 0 0 0 1.363-1.124l1.525-7.846h5.15c2.911 0 5.364-.318 7.286-.944 1.978-.642 3.797-1.731 5.408-3.238a16.52 16.52 0 0 0 3.258-4.086c.832-1.487 1.428-3.147 1.775-4.931.86-4.423.162-7.964-2.076-10.524-2.216-2.537-5.697-3.823-10.35-3.823H79.605z"/></svg>
+                        <span>PHP</span>
+                    </div>
+                    <div class="tech-item">
+                        <svg viewBox="0 0 128 128" aria-hidden="true"><path fill="#00618A" d="M117.688 98.242c-6.973-.191-12.297.461-16.852 2.379-1.293.547-3.355.559-3.566 2.18.711.746.82 1.859 1.387 2.777 1.086 1.754 2.922 4.113 4.559 5.352 1.789 1.348 3.633 2.793 5.551 3.961 3.414 2.082 7.223 3.27 10.504 5.352 1.938 1.23 3.859 2.777 5.75 4.164.934.684 1.563 1.75 2.773 2.18v-.195c-.637-.812-.801-1.93-1.387-2.777l-2.578-2.578c-2.52-3.344-5.719-6.281-9.117-8.719-2.711-1.949-8.781-4.578-9.91-7.73l-.199-.199c1.922-.219 4.172-.914 5.949-1.391 2.98-.797 5.645-.59 8.719-1.387l4.164-1.187v-.793c-1.555-1.594-2.664-3.707-4.359-5.152-4.441-3.781-9.285-7.555-14.273-10.703-2.766-1.746-6.184-2.883-9.117-4.363-.988-.496-2.719-.758-3.371-1.586-1.539-1.961-2.379-4.449-3.566-6.738-2.488-4.793-4.93-10.023-7.137-15.066-1.504-3.437-2.484-6.828-4.359-9.91-9-14.797-18.687-23.73-33.695-32.508-3.195-1.867-7.039-2.605-11.102-3.57l-6.543-.395c-1.332-.555-2.715-2.184-3.965-2.977C16.977 3.52 4.223-3.312.539 5.672-1.785 11.34 4.016 16.871 6.09 19.746c1.457 2.012 3.32 4.273 4.359 6.539.688 1.492.805 2.984 1.391 4.559 1.438 3.883 2.695 8.109 4.559 11.695.941 1.816 1.98 3.727 3.172 5.352.727.996 1.98 1.438 2.18 2.973-1.227 1.715-1.297 4.375-1.984 6.543-3.098 9.77-1.926 21.91 2.578 29.137 1.383 2.223 4.641 6.98 9.117 5.156 3.918-1.598 3.043-6.539 4.164-10.902.254-.988.098-1.715.594-2.379v.199l3.57 7.133c2.641 4.254 7.324 8.699 11.297 11.699 2.059 1.555 3.68 4.242 6.344 5.152v-.199h-.199c-.516-.805-1.324-1.137-1.98-1.781-1.551-1.523-3.277-3.414-4.559-5.156-3.613-4.902-6.805-10.27-9.711-15.855-1.391-2.668-2.598-5.609-3.77-8.324-.453-1.047-.445-2.633-1.387-3.172-1.281 1.988-3.172 3.598-4.164 5.945-1.582 3.754-1.789 8.336-2.375 13.082-.348.125-.195.039-.398.199-2.762-.668-3.73-3.508-4.758-5.949-2.594-6.164-3.078-16.09-.793-23.191.59-1.836 3.262-7.617 2.18-9.316-.516-1.691-2.219-2.672-3.172-3.965-1.18-1.598-2.355-3.703-3.172-5.551-2.125-4.805-3.113-10.203-5.352-15.062-1.07-2.324-2.875-4.676-4.359-6.738-1.645-2.289-3.484-3.977-4.758-6.742-.453-.984-1.066-2.559-.398-3.566.215-.684.516-.969 1.191-1.191 1.148-.887 4.352.297 5.547.793 3.18 1.32 5.832 2.578 8.527 4.363 1.289.855 2.598 2.512 4.16 2.973h1.785c2.789.641 5.914.195 8.523.988 4.609 1.402 8.738 3.582 12.488 5.949 11.422 7.215 20.766 17.48 27.156 29.734 1.027 1.973 1.473 3.852 2.379 5.945 1.824 4.219 4.125 8.559 5.941 12.688 1.816 4.113 3.582 8.27 6.148 11.695 1.348 1.801 6.551 2.766 8.918 3.766 1.66.699 4.379 1.43 5.949 2.379 3 1.809 5.906 3.965 8.723 5.945 1.402.992 5.73 3.168 5.945 4.957z"/></svg>
+                        <span>SQL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SOFT SKILLS ============ -->
+        <section id="softskills" class="section">
+            <h2 class="section-title reveal">Soft Skills</h2>
+            <div class="card-grid">
+                <div class="card reveal">
+                    <h3>Pensamento Lógico</h3>
+                    <p>Raciocínio lógico aplicado à resolução de problemas, dividindo desafios complexos em etapas menores e mais gerenciáveis.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Facilidade de Aprendizado</h3>
+                    <p>Facilidade para aprender novas tecnologias e se atualizar continuamente diante de um mercado em constante mudança.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Trabalho em Equipe</h3>
+                    <p>Colaboração ativa em projetos em grupo, respeitando diferentes pontos de vista e contribuindo para o resultado coletivo.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Comunicação</h3>
+                    <p>Comunicação clara e objetiva, tanto para explicar ideias técnicas quanto para ouvir e incorporar feedback.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Organização e Gestão do Tempo</h3>
+                    <p>Organização de tarefas e prazos para equilibrar estudos, projetos pessoais e vida profissional.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Proatividade e Responsabilidade</h3>
+                    <p>Iniciativa para identificar problemas e propor soluções, assumindo responsabilidade pelos resultados.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Adaptabilidade</h3>
+                    <p>Facilidade de ajuste rápido a mudanças, novas ferramentas e novos desafios.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ IDIOMAS & CURSOS ============ -->
+        <div class="two-columns">
+            <section id="idiomas" class="section">
+                <h2 class="section-title reveal">Idiomas</h2>
+                <div class="card reveal">
+                    <ul class="plain-list">
+                        <li><strong>Inglês:</strong> Intermediário</li>
+                        <li><strong>Espanhol:</strong> Intermediário</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cursos" class="section">
+                <h2 class="section-title reveal">Cursos &amp; Certificações</h2>
+                <div class="card reveal">
+                    <ul class="course-list">
+                        <li>Cisco — Fundamentos do Hardware do Computador</li>
+                        <li>IBM SkillsBuild — Fundamentos de IA</li>
+                        <li>Cisco — Introdução à Ciência de Dados</li>
+                        <li>Cisco — Introdução à Cibersegurança</li>
+                        <li>Cisco — IoT e Transformação Digital</li>
+                        <li>Cisco — Digital Awareness</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ CONTATO ============ -->
+        <section id="contato" class="section contact">
+            <h2 class="section-title reveal">Vamos conversar?</h2>
+            <p class="section-subtitle reveal">Estou disponível para estágio, projetos e oportunidades na área de tecnologia.</p>
+            <div class="contact-links reveal">
+                
+                <a href="mailto:arthurcouto4k@gmail.com" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn outline">
+                    E-mail
+                </a>
+
+                <a href="https://www.linkedin.com/in/arthurcouto"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn outline">
+                   LinkedIn
+                </a>
+
+                <a href="https://github.com/arthurcouto4k"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn outline">
+                   GitHub
+                </a>
+
+                <p class="phone">📞 (31) 9 8957-5414</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Arthur Ramos Couto. Desenvolvido com foco e código.</p>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Voltar ao topo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
