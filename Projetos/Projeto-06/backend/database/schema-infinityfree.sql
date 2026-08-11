@@ -1,18 +1,4 @@
--- =========================================================
--- PROJETO 06 — PLATAFORMA DE GESTÃO ACADÊMICA
--- Schema MySQL
--- Importe este arquivo no phpMyAdmin (Wamp/Xampp) ou via:
---   mysql -u root -p < schema.sql
---
--- VERSÃO PARA HOSPEDAGEM COMPARTILHADA (InfinityFree/000webhost):
--- sem CREATE DATABASE / USE, pois o banco já é criado pelo painel
--- do host e o usuário não tem permissão para criar bancos via SQL.
--- Rode este import com o banco correto já selecionado no phpMyAdmin.
--- =========================================================
 
--- ---------------------------------------------------------
--- CURSOS
--- ---------------------------------------------------------
 CREATE TABLE IF NOT EXISTS cursos (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     nome            VARCHAR(150) NOT NULL,
@@ -21,9 +7,7 @@ CREATE TABLE IF NOT EXISTS cursos (
     criado_em       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- ALUNOS
--- ---------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS alunos (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     nome            VARCHAR(150) NOT NULL,
@@ -35,9 +19,7 @@ CREATE TABLE IF NOT EXISTS alunos (
         ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- NOTAS (uma linha por disciplina lançada para o aluno)
--- ---------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS notas (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     aluno_id        INT NOT NULL,
@@ -48,9 +30,7 @@ CREATE TABLE IF NOT EXISTS notas (
         ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- DADOS DE EXEMPLO (iguais aos usados na demo do front-end)
--- ---------------------------------------------------------
+
 INSERT INTO cursos (nome, carga_horaria, professor) VALUES
 ('Desenvolvimento Web Full Stack', 180, 'Profa. Camila Reis'),
 ('Banco de Dados Aplicado', 120, 'Prof. Eduardo Lima'),

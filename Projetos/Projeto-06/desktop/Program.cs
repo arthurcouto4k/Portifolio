@@ -1,18 +1,4 @@
-// =========================================================
-// PROJETO 06 — PLATAFORMA DE GESTÃO ACADÊMICA
-// Módulo desktop complementar (C# / .NET).
-//
-// Aplicação de console que se conecta ao mesmo banco MySQL usado
-// pela API em PHP e pelo script Python, e lista rapidamente os
-// alunos em situação crítica (média < 5), útil para coordenadores
-// que preferem uma consulta local sem abrir o navegador.
-//
-// Pacote NuGet necessário: MySql.Data
-//   dotnet add package MySql.Data
-//
-// Execução:
-//   dotnet run
-// =========================================================
+
 
 using System;
 using System.Collections.Generic;

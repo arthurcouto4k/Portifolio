@@ -1,7 +1,4 @@
-/* =========================================================
-   CATÁLOGO DE PRODUTOS — script.js
-   Dados fictícios + busca + filtro por categoria
-   ========================================================= */
+
 
 const PRODUCTS = [
     { id: 1, name: 'Fone Bluetooth XB900', category: 'eletronicos', price: 349.90, desc: 'Som imersivo com cancelamento de ruído ativo e 30h de bateria.', emoji: '🎧' },
@@ -20,18 +17,18 @@ const PRODUCTS = [
     { id: 14, name: 'Mesa Articulada Monitor', category: 'casa', price: 279.90, desc: 'Suporte de mesa com braço articulado para monitor até 32".', emoji: '🖥️' },
 ];
 
-// Estado
+
 let activeCategory = 'all';
 let searchQuery = '';
 
-// Elementos
+
 const grid       = document.getElementById('productGrid');
 const emptyMsg   = document.getElementById('emptyMsg');
 const countBadge = document.getElementById('countBadge');
 const searchInput = document.getElementById('searchInput');
 const filterBtns  = document.querySelectorAll('.filter-btn');
 
-/* ---- Renderiza os cards ---- */
+
 function render() {
     const q = searchQuery.toLowerCase();
 
@@ -71,7 +68,7 @@ function render() {
         grid.appendChild(card);
     });
 
-    // Feedback visual no botão de carrinho
+    
     grid.querySelectorAll('.btn-cart').forEach(btn => {
         btn.addEventListener('click', () => {
             btn.textContent = '✅ Adicionado!';
@@ -84,7 +81,7 @@ function render() {
     });
 }
 
-/* ---- Filtros ---- */
+
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -94,7 +91,7 @@ filterBtns.forEach(btn => {
     });
 });
 
-/* ---- Busca com debounce leve ---- */
+
 let debounceTimer;
 searchInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
@@ -104,5 +101,5 @@ searchInput.addEventListener('input', () => {
     }, 200);
 });
 
-/* ---- Init ---- */
+
 render();

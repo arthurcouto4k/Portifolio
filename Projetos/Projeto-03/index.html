@@ -24,7 +24,7 @@
         .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
 
-        /* Cards */
+        
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
         .card h2 { font-size: .9rem; font-weight: 700; margin-bottom: 1rem; color: var(--accent); display: flex; align-items: center; gap: .5rem; }
         label { display: block; font-size: .78rem; color: var(--muted); margin-bottom: .3rem; margin-top: .75rem; font-weight: 500; }
@@ -34,7 +34,7 @@
         .btn:hover { opacity: .85; }
         .btn.outline { background: none; border: 1.5px solid var(--primary); color: var(--primary); }
 
-        /* Response */
+        
         .response-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-top: 1.5rem; }
         .response-box h3 { font-size: .8rem; color: var(--muted); margin-bottom: .75rem; }
         pre { font-family: 'JetBrains Mono', monospace; font-size: .78rem; white-space: pre-wrap; word-break: break-word; color: var(--text); }
@@ -42,7 +42,7 @@
         .ok  { background: rgba(74,222,128,.15); color: var(--green); }
         .err { background: rgba(248,113,113,.15); color: var(--red); }
 
-        /* Users table */
+        
         .users-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: .5rem; }
         .users-table th { text-align: left; padding: .4rem .6rem; color: var(--muted); font-size: .72rem; font-weight: 600; border-bottom: 1px solid var(--border); }
         .users-table td { padding: .45rem .6rem; border-bottom: 1px solid var(--border); }
@@ -69,7 +69,7 @@
 
     <div class="grid2">
 
-        <!-- Cadastro -->
+        
         <div class="card">
             <h2>📝 Cadastrar Usuário</h2>
             <label>Nome</label>
@@ -81,7 +81,7 @@
             <button class="btn" onclick="register()">Cadastrar</button>
         </div>
 
-        <!-- Login -->
+        
         <div class="card">
             <h2>🔐 Login</h2>
             <label>E-mail</label>
@@ -93,13 +93,13 @@
 
     </div>
 
-    <!-- Lista de usuários -->
+   
     <div class="card">
         <h2>👥 Usuários Cadastrados <button class="btn outline" style="width:auto;margin:0;padding:.3rem .8rem;font-size:.75rem;" onclick="listUsers()">↻ Atualizar</button></h2>
         <div id="usersContainer"><p class="empty-users">Clique em "Atualizar" para carregar.</p></div>
     </div>
 
-    <!-- Response log -->
+    
     <div class="response-box">
         <h3>📡 Última resposta da API</h3>
         <pre id="responseLog">—</pre>

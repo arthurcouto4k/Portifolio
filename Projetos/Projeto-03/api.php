@@ -12,7 +12,7 @@
  * Requer: PHP 8.0+, PDO + SQLite (ext-sqlite3 ou ext-pdo_sqlite)
  */
 
-// ---------- Configuração ----------
+
 define('DB_FILE', __DIR__ . '/database.sqlite');
 
 header('Content-Type: application/json; charset=utf-8');
@@ -22,7 +22,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
 
-// ---------- Banco de dados ----------
+
 function getDB(): PDO {
     $pdo = new PDO('sqlite:' . DB_FILE);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,7 +39,7 @@ function getDB(): PDO {
     return $pdo;
 }
 
-// ---------- Helpers ----------
+
 function respond(array $data, int $status = 200): void {
     http_response_code($status);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -55,14 +55,14 @@ function validateEmail(string $email): bool {
     return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
-// ---------- Roteamento ----------
+
 $action = $_GET['action'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'];
 
 try {
     $db = getDB();
 
-    // ---- CADASTRO ----
+    
     if ($action === 'register' && $method === 'POST') {
         $body = body();
         $name  = trim($body['name']  ?? '');
@@ -90,7 +90,7 @@ try {
         ], 201);
     }
 
-    // ---- LOGIN ----
+    
     if ($action === 'login' && $method === 'POST') {
         $body  = body();
         $email = trim($body['email'] ?? '');
@@ -108,7 +108,7 @@ try {
             respond(['error' => 'Credenciais inválidas.'], 401);
         }
 
-        // Em produção: gere um JWT. Aqui retornamos dados básicos.
+        
         respond([
             'success' => true,
             'message' => 'Login realizado.',
@@ -116,13 +116,13 @@ try {
         ]);
     }
 
-    // ---- LISTAR ----
+   
     if ($action === 'users' && $method === 'GET') {
         $rows = $db->query('SELECT id, name, email, created_at FROM users ORDER BY id DESC')->fetchAll();
         respond(['success' => true, 'total' => count($rows), 'users' => $rows]);
     }
 
-    // ---- DELETAR ----
+    
     if ($action === 'delete' && $method === 'DELETE') {
         $id = (int) ($_GET['id'] ?? 0);
         if ($id <= 0) respond(['error' => 'ID inválido.'], 400);
@@ -139,6 +139,6 @@ try {
     respond(['error' => 'Ação inválida ou método não permitido.'], 400);
 
 } catch (PDOException $e) {
-    // Em produção não exponha $e->getMessage()
+    
     respond(['error' => 'Erro interno no servidor.'], 500);
 }

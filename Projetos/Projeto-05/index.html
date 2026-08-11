@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ── Reset & Tokens ─────────────────────────────── */
+    
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -140,7 +140,7 @@
     #toast.error   { border-color: var(--danger);  color: var(--danger); }
     #toast.warning { border-color: var(--warning); color: var(--warning); }
 
-    /* ── Modal ──────────────────────────────────────── */
+    
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
     .modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; width: 100%; max-width: 460px; box-shadow: var(--shadow); }
@@ -149,10 +149,10 @@
     .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; }
     .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
 
-    /* ── Section header ─────────────────────────────── */
+   
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: .75rem; }
 
-    /* ── Sparkline ──────────────────────────────────── */
+   
     .progress-bar { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; margin-top: .4rem; }
     .progress-fill { height: 100%; border-radius: 3px; transition: width .4s; }
 
@@ -199,7 +199,7 @@
 
   <main class="main">
 
-    <!-- Dashboard -->
+    
     <div class="page active" id="page-dashboard">
       <h1 class="page-title">Dashboard</h1>
       <p class="page-sub">Resumo do estoque em tempo real.</p>
@@ -234,7 +234,7 @@
       </div>
     </div>
 
-    <!-- Produtos -->
+    
     <div class="page" id="page-produtos">
       <div class="section-header">
         <div>
@@ -254,7 +254,7 @@
       </div>
     </div>
 
-    <!-- Movimentação -->
+    
     <div class="page" id="page-movimentacao">
       <div class="section-header">
         <div>
@@ -271,14 +271,14 @@
       </div>
     </div>
 
-    <!-- Relatório -->
+    
     <div class="page" id="page-relatorio">
       <h1 class="page-title">Relatório de Estoque</h1>
       <p class="page-sub">Visão consolidada por categoria.</p>
       <div id="relatorio-content"></div>
     </div>
 
-    <!-- Novo Produto -->
+    
     <div class="page" id="page-novo-produto">
       <h1 class="page-title">Novo Produto</h1>
       <p class="page-sub">Cadastre um produto no estoque.</p>
@@ -330,7 +330,7 @@
   </main>
 </div>
 
-<!-- Modal Movimentação -->
+
 <div class="modal-overlay" id="modal-mov">
   <div class="modal">
     <h3>Registrar Movimentação</h3>
@@ -370,7 +370,7 @@
 <div id="toast"></div>
 
 <script>
-/* ── Storage ────────────────────────────────────── */
+
 const PROD_KEY = 'est-produtos';
 const MOV_KEY  = 'est-movs';
 
@@ -395,9 +395,8 @@ function load(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } c
 function save(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
 
 let produtos = load(PROD_KEY, DEFAULT_PRODUTOS);
-let movs     = load(MOV_KEY,  DEFAULT_MOVS);
+let movs = load(MOV_KEY,  DEFAULT_MOVS);
 
-/* ── Nav ────────────────────────────────────────── */
 document.querySelectorAll('.nav-item').forEach(btn => {
   btn.addEventListener('click', () => goToPage(btn.dataset.page));
 });
@@ -407,21 +406,21 @@ function goToPage(id) {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + id)?.classList.add('active');
   document.querySelector(`[data-page="${id}"]`)?.classList.add('active');
-  if (id === 'dashboard')   renderDashboard();
-  if (id === 'produtos')    renderProdutos();
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'produtos') renderProdutos();
   if (id === 'movimentacao') renderMovs();
-  if (id === 'relatorio')   renderRelatorio();
+  if (id === 'relatorio') renderRelatorio();
 }
 
-/* ── Toast ──────────────────────────────────────── */
+
 let timer;
+
 function toast(msg, type = 'success') {
   const t = document.getElementById('toast');
   t.textContent = msg; t.className = 'show ' + type;
   clearTimeout(timer); timer = setTimeout(() => t.className = '', 3000);
 }
 
-/* ── Status helpers ─────────────────────────────── */
 function getStatus(p) {
   if (p.estoque <= 0)          return ['critical', 'Crítico'];
   if (p.estoque < p.minimo)    return ['low',      'Baixo'];
@@ -437,7 +436,7 @@ function fmtTs(ts) {
   return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
 }
 
-/* ── Dashboard ──────────────────────────────────── */
+
 function renderDashboard() {
   const total = produtos.length;
   const ok    = produtos.filter(p => p.estoque >= p.minimo).length;
@@ -460,7 +459,7 @@ function renderDashboard() {
     : '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">✅ Todos os produtos estão com estoque adequado.</td></tr>';
 }
 
-/* ── Produtos ────────────────────────────────────── */
+
 let searchProd = '';
 document.getElementById('search-prod').addEventListener('input', e => {
   searchProd = e.target.value.toLowerCase();
@@ -523,7 +522,7 @@ function deleteProd(id) {
   toast('Produto removido.', 'error');
 }
 
-/* ── Movimentação ────────────────────────────────── */
+
 function openMovModal() {
   const sel = document.getElementById('m-produto');
   sel.innerHTML = produtos.map(p => `<option value="${p.id}">${p.nome}</option>`).join('');
@@ -575,7 +574,7 @@ function renderMovs() {
     : '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">Nenhuma movimentação registrada.</td></tr>';
 }
 
-/* ── Relatório ──────────────────────────────────── */
+
 function renderRelatorio() {
   const cats = [...new Set(produtos.map(p => p.cat))].sort();
   const html = cats.map(cat => {
@@ -613,7 +612,7 @@ function renderRelatorio() {
   document.getElementById('relatorio-content').innerHTML = html || '<p style="color:var(--muted)">Nenhum produto cadastrado.</p>';
 }
 
-/* ── Novo Produto ────────────────────────────────── */
+
 function saveProduto() {
   const nome    = document.getElementById('p-nome').value.trim();
   const cat     = document.getElementById('p-cat').value;
@@ -639,7 +638,7 @@ function resetProdForm() {
   document.getElementById('p-cat').value = '';
 }
 
-/* ── Init ───────────────────────────────────────── */
+
 renderDashboard();
 </script>
 </body>

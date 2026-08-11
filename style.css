@@ -1,11 +1,6 @@
-/* =========================================================
-   DESIGN TOKENS
-   Paleta: fundo grafite frio + acentos ciano-menta e âmbar,
-   inspirada em terminais de código. Tipografia: Inter (corpo/
-   display) + JetBrains Mono (labels, tags, dados técnicos).
-   ========================================================= */
+
 :root {
-    /* Tema escuro (padrão) */
+    
     --bg-color: #0a0e14;
     --bg-color-alt: #0d121b;
     --card-bg: #10151f;
@@ -30,7 +25,7 @@
     --transition: all 0.25s ease;
 }
 
-/* Tema claro */
+
 [data-theme="light"] {
     --bg-color: #f7f8fa;
     --bg-color-alt: #ffffff;
@@ -47,9 +42,7 @@
     --shadow-lift: 0 20px 40px -20px rgba(31, 158, 133, 0.25);
 }
 
-/* =========================================================
-   RESET & BASE
-   ========================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -84,7 +77,7 @@ a {
     padding: 0 20px;
 }
 
-/* Link de acessibilidade: pular para conteúdo */
+
 .skip-link {
     position: absolute;
     left: -999px;
@@ -102,7 +95,7 @@ a {
     top: 16px;
 }
 
-/* Foco visível para navegação por teclado */
+
 a:focus-visible,
 button:focus-visible {
     outline: 2px solid var(--accent);
@@ -110,9 +103,7 @@ button:focus-visible {
     border-radius: 4px;
 }
 
-/* =========================================================
-   HEADER & NAV
-   ========================================================= */
+
 header {
     background-color: var(--header-bg);
     backdrop-filter: blur(12px);
@@ -165,7 +156,7 @@ header {
     color: var(--accent);
 }
 
-/* Botão de alternância de tema */
+
 .theme-toggle {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -196,7 +187,7 @@ header {
 [data-theme="light"] .icon-sun { display: none; }
 [data-theme="light"] .icon-moon { display: block; }
 
-/* Hambúrguer (mobile) */
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -224,9 +215,7 @@ header {
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* =========================================================
-   HERO
-   ========================================================= */
+
 .hero {
     padding: 90px 0 50px;
 }
@@ -301,9 +290,7 @@ header {
     transform: scale(1.03) rotate(-1deg);
 }
 
-/* =========================================================
-   SECTIONS & CARDS
-   ========================================================= */
+
 .section {
     padding: 70px 0;
     border-bottom: 1px solid var(--card-border);
@@ -383,9 +370,7 @@ header {
     margin-bottom: 0.5rem;
 }
 
-/* =========================================================
-   PROJETOS
-   ========================================================= */
+
 .filters {
     display: flex;
     gap: 10px;
@@ -495,9 +480,7 @@ header {
     padding: 2rem 0;
 }
 
-/* =========================================================
-   TAGS
-   ========================================================= */
+
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -523,9 +506,7 @@ header {
     color: #ffffff;
 }
 
-/* =========================================================
-   COMPETÊNCIAS / SKILLS
-   ========================================================= */
+
 .skills-container {
     display: flex;
     flex-direction: column;
@@ -538,7 +519,7 @@ header {
     font-size: 1rem;
 }
 
-/* Ícones de tecnologia */
+
 .tech-heading {
     font-size: 1.1rem;
     margin-bottom: 1.2rem;
@@ -575,9 +556,7 @@ header {
     transform: translateY(-3px);
 }
 
-/* =========================================================
-   DUAS COLUNAS (IDIOMAS / CURSOS)
-   ========================================================= */
+
 .two-columns {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -602,9 +581,7 @@ header {
     color: var(--accent);
 }
 
-/* =========================================================
-   CONTATO
-   ========================================================= */
+
 .contact {
     text-align: center;
     border-bottom: none;
@@ -674,9 +651,7 @@ footer {
     font-size: 0.8rem;
 }
 
-/* =========================================================
-   BOTÃO VOLTAR AO TOPO
-   ========================================================= */
+
 .back-to-top {
     position: fixed;
     bottom: 26px;
@@ -712,9 +687,8 @@ footer {
     height: 20px;
 }
 
-/* =========================================================
-   SCROLL REVEAL (estado inicial; JS adiciona .is-visible)
-   ========================================================= */
+
+
 .reveal {
     opacity: 0;
     transform: translateY(18px);
@@ -726,7 +700,7 @@ footer {
     transform: translateY(0);
 }
 
-/* Respeita preferência por menos movimento */
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -736,9 +710,7 @@ footer {
     }
 }
 
-/* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
+
 @media (max-width: 900px) {
     .two-columns {
         grid-template-columns: 1fr;
@@ -808,4 +780,165 @@ footer {
     .section { padding: 50px 0; }
     .hero { padding: 70px 0 40px; }
     .btn { padding: 11px 22px; font-size: 0.9rem; }
+}
+
+
+.contact .contact-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.icon-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.icon-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.icon-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+}
+
+.contact .phone-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact .phone-wrap .phone {
+    margin-top: 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+    margin-top: 2.5rem;
+    text-align: left;
+}
+
+.contact-form {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-form label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: var(--bg-color-alt);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    resize: vertical;
+    transition: var(--transition);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.contact-form .btn {
+    align-self: flex-start;
+}
+
+.contact-form .form-status {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    min-height: 1.2em;
+}
+
+.contact-form .form-status.success {
+    color: var(--accent);
+}
+
+.contact-form .form-status.error {
+    color: var(--danger);
+}
+
+.contact-email-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+    text-align: left;
+}
+
+.contact-email-info h3 {
+    color: var(--accent);
+    font-size: 1.05rem;
+}
+
+.contact-email-info p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+}
+
+.contact-email-info .email-link {
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    text-decoration: none;
+    background: var(--accent-soft);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    width: fit-content;
+    transition: var(--transition);
+}
+
+.contact-email-info .email-link:hover {
+    background: var(--accent);
+    color: #06251f;
+}
+
+[data-theme="light"] .contact-email-info .email-link:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form .btn {
+        align-self: stretch;
+        justify-content: center;
+    }
 }

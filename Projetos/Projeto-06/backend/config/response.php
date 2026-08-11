@@ -1,7 +1,5 @@
 <?php
-/**
- * PROJETO 06 — Helper de resposta JSON para os endpoints da API.
- */
+
 
 function sendJson(mixed $data, int $statusCode = 200): never
 {

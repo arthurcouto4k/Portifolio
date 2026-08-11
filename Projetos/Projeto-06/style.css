@@ -1,9 +1,4 @@
-/* =========================================================
-   PROJETO 06 — PLATAFORMA DE GESTÃO ACADÊMICA
-   Reaproveita os design tokens do portfólio principal para
-   manter a identidade visual, e adiciona os componentes
-   específicos desta tela (dashboard, abas, tabela, modais).
-   ========================================================= */
+
 :root {
     --bg-color: #0a0e14;
     --bg-color-alt: #0d121b;
@@ -88,9 +83,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     border-radius: 4px;
 }
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+
 .app-header {
     background: var(--bg-color-alt);
     border-bottom: 1px solid var(--card-border);
@@ -148,9 +141,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 [data-theme="light"] .icon-sun { display: none; }
 [data-theme="light"] .icon-moon { display: block; }
 
-/* =========================================================
-   INTRO DO PROJETO
-   ========================================================= */
+
 .project-intro {
     padding: 56px 0 36px;
 }
@@ -190,9 +181,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-size: 0.78rem;
 }
 
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
+
 .dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -224,9 +213,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     color: var(--accent);
 }
 
-/* =========================================================
-   PAINEL / ABAS
-   ========================================================= */
+
 .panel {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -293,9 +280,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .input:focus { border-color: var(--accent); }
 #buscaAluno { flex: 1; min-width: 200px; }
 
-/* =========================================================
-   TABELA
-   ========================================================= */
+
 .table-wrap { overflow-x: auto; }
 
 .data-table {
@@ -361,9 +346,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     padding: 2rem 0;
 }
 
-/* =========================================================
-   CURSOS
-   ========================================================= */
+
 .course-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -388,9 +371,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     color: var(--text-primary);
 }
 
-/* =========================================================
-   BOLETIM
-   ========================================================= */
+
 .boletim-resumo {
     margin-top: 1.2rem;
     display: flex;
@@ -402,9 +383,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .boletim-resumo strong { color: var(--text-primary); }
 
-/* =========================================================
-   BOTÕES
-   ========================================================= */
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -429,9 +408,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .btn.outline:hover { color: #06251f; }
 [data-theme="light"] .btn.outline:hover { color: #fff; }
 
-/* =========================================================
-   NOTA SOBRE A STACK
-   ========================================================= */
+
 .stack-note { padding-top: 8px; }
 
 .section-title-sm {
@@ -457,9 +434,7 @@ footer {
     border-top: 1px solid var(--card-border);
 }
 
-/* =========================================================
-   MODAIS
-   ========================================================= */
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -501,9 +476,7 @@ footer {
     margin-top: 1.4rem;
 }
 
-/* =========================================================
-   RESPONSIVO
-   ========================================================= */
+
 @media (max-width: 640px) {
     .app-logo { display: none; }
     .project-intro h1 { font-size: 1.6rem; }

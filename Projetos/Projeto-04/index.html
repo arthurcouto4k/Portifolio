@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── Reset & Tokens ─────────────────────────────── */
+    
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -36,7 +36,7 @@
       flex-direction: column;
     }
 
-    /* ── Header ─────────────────────────────────────── */
+    
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -54,10 +54,10 @@
     .back-link { font-size: .85rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: .4rem; transition: color .2s; }
     .back-link:hover { color: var(--accent); }
 
-    /* ── Layout ─────────────────────────────────────── */
+    
     .app { display: flex; flex: 1; min-height: 0; }
 
-    /* Sidebar */
+    
     .sidebar {
       width: 220px;
       min-width: 220px;
@@ -80,16 +80,16 @@
     .nav-item.active { background: rgba(125,211,192,.12); color: var(--accent); }
     .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    /* Main */
+    
     .main { flex: 1; padding: 2rem; overflow-y: auto; }
     .page { display: none; }
     .page.active { display: block; }
 
-    /* ── Typography ─────────────────────────────────── */
+    
     .page-title { font-size: 1.4rem; font-weight: 700; margin-bottom: .4rem; }
     .page-sub   { color: var(--muted); font-size: .9rem; margin-bottom: 1.5rem; }
 
-    /* ── Cards / Stats ──────────────────────────────── */
+    
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 1rem; margin-bottom: 2rem; }
     .stat-card {
       background: var(--surface);
@@ -104,7 +104,7 @@
     .stat-card.danger  .stat-value { color: var(--danger); }
     .stat-card.success .stat-value { color: var(--success); }
 
-    /* ── Table ──────────────────────────────────────── */
+    
     .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
     table { width: 100%; border-collapse: collapse; font-size: .88rem; }
     th { background: var(--surface2); padding: .75rem 1rem; text-align: left; color: var(--muted); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .5px; }
@@ -118,7 +118,7 @@
     .badge-confirmed { background: rgba(74,222,128,.15);  color: var(--success); }
     .badge-cancelled { background: rgba(248,113,113,.15); color: var(--danger); }
 
-    /* ── Form ───────────────────────────────────────── */
+    
     .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; max-width: 600px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: .4rem; }
@@ -139,7 +139,7 @@
     select option { background: var(--surface2); }
     textarea { resize: vertical; min-height: 80px; }
 
-    /* ── Buttons ─────────────────────────────────────── */
+    
     .btn {
       display: inline-flex; align-items: center; gap: .5rem;
       padding: .6rem 1.2rem; border-radius: 8px; font-size: .88rem;
@@ -153,7 +153,7 @@
     .btn-ghost   { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
     .btn-sm      { padding: .35rem .75rem; font-size: .8rem; }
 
-    /* ── Toast ──────────────────────────────────────── */
+    
     #toast {
       position: fixed; bottom: 1.5rem; right: 1.5rem;
       background: var(--surface); border: 1px solid var(--border);
@@ -167,7 +167,7 @@
     #toast.success { border-color: var(--success); color: var(--success); }
     #toast.error   { border-color: var(--danger);  color: var(--danger); }
 
-    /* ── Modal ──────────────────────────────────────── */
+    
     .modal-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,.7); z-index: 200;
@@ -183,13 +183,13 @@
     .modal p  { color: var(--muted); font-size: .9rem; margin-bottom: 1.25rem; }
     .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; }
 
-    /* ── Responsive ─────────────────────────────────── */
+    
     @media (max-width: 700px) {
       .sidebar { display: none; }
       .form-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── Empty state ─────────────────────────────────── */
+    
     .empty { text-align: center; padding: 3rem 1rem; color: var(--muted); }
     .empty svg { width: 48px; height: 48px; opacity: .3; margin-bottom: 1rem; }
 
@@ -215,7 +215,7 @@
 
 <div class="app">
 
-  <!-- Sidebar -->
+  
   <aside class="sidebar">
     <span class="sidebar-label">Menu</span>
     <button class="nav-item active" data-page="dashboard">
@@ -238,7 +238,7 @@
 
   <main class="main">
 
-    <!-- Dashboard -->
+    
     <div class="page active" id="page-dashboard">
       <h1 class="page-title">Dashboard</h1>
       <p class="page-sub">Visão geral do sistema de reservas.</p>
@@ -277,7 +277,7 @@
       </div>
     </div>
 
-    <!-- Nova Reserva -->
+    
     <div class="page" id="page-nova">
       <h1 class="page-title">Nova Reserva</h1>
       <p class="page-sub">Preencha os dados abaixo para registrar uma nova reserva.</p>
@@ -334,7 +334,7 @@
       </div>
     </div>
 
-    <!-- Reservas -->
+    
     <div class="page" id="page-reservas">
       <div class="section-header">
         <div>
@@ -364,7 +364,7 @@
       </div>
     </div>
 
-    <!-- Espaços -->
+    
     <div class="page" id="page-espacos">
       <div class="section-header">
         <div>
@@ -385,7 +385,7 @@
   </main>
 </div>
 
-<!-- Modal confirmação exclusão -->
+
 <div class="modal-overlay" id="modal-delete">
   <div class="modal">
     <h3>Excluir reserva?</h3>
@@ -400,7 +400,7 @@
 <div id="toast"></div>
 
 <script>
-/* ── Dados iniciais ─────────────────────────────── */
+
 const ESPACOS_KEY  = 'res-espacos';
 const RESERVAS_KEY = 'res-reservas';
 
@@ -419,7 +419,7 @@ const DEFAULT_RESERVAS = [
   { id: 5, nome: 'Fernando Nunes', email: 'fer@email.com',    espacoId: 1, pessoas: 8,  data: '2026-07-18', horaIni: '10:00', horaFim: '12:00', status: 'pending',   obs: '' },
 ];
 
-/* ── Storage helpers ────────────────────────────── */
+
 function load(key, def) {
   try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
 }
@@ -428,7 +428,7 @@ function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
 let espacos  = load(ESPACOS_KEY,  DEFAULT_ESPACOS);
 let reservas = load(RESERVAS_KEY, DEFAULT_RESERVAS);
 
-/* ── Navigation ─────────────────────────────────── */
+
 document.querySelectorAll('.nav-item').forEach(btn => {
   btn.addEventListener('click', () => goToPage(btn.dataset.page));
 });
@@ -444,7 +444,7 @@ function goToPage(id) {
   if (id === 'nova')      populateEspacoSelect();
 }
 
-/* ── Toast ──────────────────────────────────────── */
+
 let toastTimer;
 function toast(msg, type = 'success') {
   const t = document.getElementById('toast');
@@ -453,7 +453,7 @@ function toast(msg, type = 'success') {
   toastTimer = setTimeout(() => t.className = '', 3000);
 }
 
-/* ── Status helpers ─────────────────────────────── */
+
 function statusBadge(s) {
   const map = { pending: ['badge-pending','Pendente'], confirmed: ['badge-confirmed','Confirmada'], cancelled: ['badge-cancelled','Cancelada'] };
   const [cls, label] = map[s] || ['','—'];
@@ -465,7 +465,7 @@ function fmtDate(d) {
   return `${dd}/${m}/${y}`;
 }
 
-/* ── Dashboard ──────────────────────────────────── */
+
 function renderDashboard() {
   const total     = reservas.length;
   const confirmed = reservas.filter(r => r.status === 'confirmed').length;
@@ -496,7 +496,7 @@ function renderDashboard() {
     : '<tr><td colspan="5" class="empty">Nenhuma reserva encontrada.</td></tr>';
 }
 
-/* ── Reservas ────────────────────────────────────── */
+
 let currentFilter = 'all';
 let searchQuery   = '';
 
@@ -534,7 +534,7 @@ function renderReservas() {
     : '<tr><td colspan="7" class="empty">Nenhuma reserva encontrada.</td></tr>';
 }
 
-// Filtros
+
 document.querySelectorAll('.filter-chip').forEach(chip => {
   chip.addEventListener('click', () => {
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
@@ -549,7 +549,7 @@ document.getElementById('search-input').addEventListener('input', e => {
   renderReservas();
 });
 
-/* ── Status cycle ───────────────────────────────── */
+
 function changeStatus(id) {
   const r = reservas.find(x => x.id === id);
   if (!r) return;
@@ -561,7 +561,7 @@ function changeStatus(id) {
   toast('Status atualizado!');
 }
 
-/* ── Delete ─────────────────────────────────────── */
+
 let deleteTarget = null;
 function askDelete(id)   { deleteTarget = id; document.getElementById('modal-delete').classList.add('open'); }
 function closeModal()    { document.getElementById('modal-delete').classList.remove('open'); deleteTarget = null; }
@@ -574,7 +574,7 @@ function confirmDelete() {
   toast('Reserva excluída.', 'error');
 }
 
-/* ── Nova Reserva ───────────────────────────────── */
+
 function populateEspacoSelect() {
   const sel = document.getElementById('f-espaco');
   sel.innerHTML = '<option value="">Selecione...</option>' +
@@ -616,7 +616,7 @@ function resetForm() {
   document.getElementById('f-data').value = '';
 }
 
-/* ── Espaços ─────────────────────────────────────── */
+
 function renderEspacos() {
   const tbody = document.getElementById('espacos-tbody');
   tbody.innerHTML = espacos.map(e => `<tr>
@@ -648,7 +648,7 @@ function deleteEspaco(id) {
   toast('Espaço removido.', 'error');
 }
 
-/* ── Init ───────────────────────────────────────── */
+
 renderDashboard();
 </script>
 </body>

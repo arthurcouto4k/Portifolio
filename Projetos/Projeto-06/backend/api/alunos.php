@@ -1,12 +1,5 @@
 <?php
-/**
- * PROJETO 06 — API de Alunos
- * GET    /backend/api/alunos.php             -> lista alunos com média e situação
- * GET    /backend/api/alunos.php?id=5        -> detalha um aluno (com notas)
- * POST   /backend/api/alunos.php             -> cria aluno { nome, email, curso_id, status }
- * PUT    /backend/api/alunos.php?id=5        -> atualiza aluno
- * DELETE /backend/api/alunos.php?id=5        -> remove aluno
- */
+
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
@@ -23,7 +16,7 @@ if ($metodo === 'OPTIONS') {
     sendJson(null, 204);
 }
 
-/** Calcula média e situação (Aprovado / Recuperação / Reprovado) a partir das notas. */
+
 function calcularSituacao(array $notas): array
 {
     if (empty($notas)) {

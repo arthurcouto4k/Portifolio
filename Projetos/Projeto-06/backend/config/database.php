@@ -1,9 +1,5 @@
 <?php
-/**
- * PROJETO 06 — PLATAFORMA DE GESTÃO ACADÊMICA
- * Conexão com o banco via PDO. Ajuste as credenciais conforme
- * seu ambiente (Wamp/Xampp/Laragon).
- */
+
 
 class Database
 {

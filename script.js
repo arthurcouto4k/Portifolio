@@ -1,10 +1,3 @@
-/* =========================================================
-   PORTFÓLIO — SCRIPT PRINCIPAL
-   Organizado por funcionalidade. Cada bloco é independente
-   e só é ativado se os elementos correspondentes existirem
-   na página (evita erros caso o HTML seja editado depois).
-   ========================================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initMobileMenu();
@@ -13,11 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
 });
 
-/* ---------------------------------------------------------
-   1. TEMA CLARO / ESCURO
-   Salva a preferência do usuário em localStorage e respeita
-   a preferência do sistema operacional na primeira visita.
-   --------------------------------------------------------- */
+
 function initThemeToggle() {
     const toggleBtn = document.getElementById('themeToggle');
     if (!toggleBtn) return;
@@ -46,9 +35,7 @@ function initThemeToggle() {
     }
 }
 
-/* ---------------------------------------------------------
-   2. MENU MOBILE (HAMBÚRGUER)
-   --------------------------------------------------------- */
+
 function initMobileMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
@@ -72,12 +59,7 @@ function initMobileMenu() {
     });
 }
 
-/* ---------------------------------------------------------
-   3. SCROLL REVEAL
-   Revela elementos com a classe .reveal conforme entram na
-   viewport, usando IntersectionObserver (mais performático
-   que escutar o evento de scroll diretamente).
-   --------------------------------------------------------- */
+
 function initScrollReveal() {
     const revealEls = document.querySelectorAll('.reveal');
     if (!revealEls.length) return;
@@ -103,11 +85,7 @@ function initScrollReveal() {
     revealEls.forEach((el) => observer.observe(el));
 }
 
-/* ---------------------------------------------------------
-   4. FILTRO DE PROJETOS POR CATEGORIA
-   Cada card de projeto tem data-category com uma ou mais
-   categorias separadas por espaço (ex: "web frontend").
-   --------------------------------------------------------- */
+
 function initProjectFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
@@ -137,10 +115,7 @@ function initProjectFilters() {
     });
 }
 
-/* ---------------------------------------------------------
-   5. BOTÃO VOLTAR AO TOPO
-   Aparece após rolar uma certa distância da página.
-   --------------------------------------------------------- */
+
 function initBackToTop() {
     const btn = document.getElementById('backToTop');
     if (!btn) return;
@@ -156,3 +131,37 @@ function initBackToTop() {
     });
 }
 
+// ===== Formulário de contato (envio via Formspree, sem backend próprio) =====
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = 'Enviando...';
+        status.className = 'form-status';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                status.textContent = 'Mensagem enviada com sucesso! Obrigado pelo contato.';
+                status.className = 'form-status success';
+                form.reset();
+            } else {
+                status.textContent = 'Não foi possível enviar agora. Tente novamente ou use o e-mail ao lado.';
+                status.className = 'form-status error';
+            }
+        } catch (err) {
+            status.textContent = 'Erro de conexão. Tente novamente ou use o e-mail ao lado.';
+            status.className = 'form-status error';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initContactForm);

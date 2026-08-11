@@ -1,12 +1,6 @@
-/* =========================================================
-   PAINEL DE TAREFAS — script.js
-   Kanban (A fazer / Em andamento / Concluído)
-   Drag-and-drop nativo + localStorage + modo escuro
-   ========================================================= */
-
 const STORAGE_KEY = 'kanban-tasks-arc';
 
-/* ---- Estado ---- */
+
 let tasks = loadTasks();
 let draggedId = null;
 
@@ -20,7 +14,7 @@ const statsEl        = document.getElementById('stats');
 
 const COLS = ['todo', 'doing', 'done'];
 
-/* ---- Tema ---- */
+
 const savedTheme = localStorage.getItem('kanban-theme') || 'light';
 if (savedTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -39,7 +33,6 @@ themeBtn.addEventListener('click', () => {
     }
 });
 
-/* ---- Adicionar tarefa ---- */
 addBtn.addEventListener('click', addTask);
 taskInput.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
@@ -62,14 +55,14 @@ function addTask() {
     taskInput.focus();
 }
 
-/* ---- Limpar concluídas ---- */
+
 clearDoneBtn.addEventListener('click', () => {
     tasks = tasks.filter(t => t.status !== 'done');
     saveTasks();
     render();
 });
 
-/* ---- Render ---- */
+
 function render() {
     COLS.forEach(status => {
         const list  = document.getElementById(`list-${status}`);
@@ -92,7 +85,7 @@ function render() {
                 <button class="btn-del" data-id="${task.id}" aria-label="Remover tarefa" title="Remover">✕</button>
             `;
 
-            /* Drag events */
+            
             card.addEventListener('dragstart', e => {
                 draggedId = task.id;
                 card.classList.add('dragging');
@@ -104,7 +97,7 @@ function render() {
                 document.querySelectorAll('.kanban-col').forEach(c => c.classList.remove('drag-over'));
             });
 
-            /* Delete */
+            
             card.querySelector('.btn-del').addEventListener('click', () => {
                 tasks = tasks.filter(t => t.id !== task.id);
                 saveTasks();
@@ -115,7 +108,7 @@ function render() {
         });
     });
 
-    /* ---- Drop zones ---- */
+    
     document.querySelectorAll('.kanban-col').forEach(col => {
         col.ondragover = e => {
             e.preventDefault();
@@ -136,7 +129,7 @@ function render() {
         };
     });
 
-    /* ---- Estatísticas ---- */
+    
     const total = tasks.length;
     const done  = tasks.filter(t => t.status === 'done').length;
     const pct   = total ? Math.round((done / total) * 100) : 0;
@@ -147,7 +140,6 @@ function render() {
     `;
 }
 
-/* ---- Persistência ---- */
 function saveTasks() { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); }
 function loadTasks() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultTasks(); }
@@ -161,10 +153,10 @@ function defaultTasks() {
     ];
 }
 
-/* ---- Utilitário ---- */
+
 function escapeHtml(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ---- Init ---- */
+
 render();

@@ -1,9 +1,5 @@
 <?php
-/**
- * PROJETO 06 — API de Cursos
- * GET    /backend/api/cursos.php             -> lista todos os cursos (com total de alunos)
- * POST   /backend/api/cursos.php             -> cria um curso { nome, carga_horaria, professor }
- */
+
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');

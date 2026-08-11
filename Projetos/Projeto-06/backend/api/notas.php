@@ -1,9 +1,5 @@
 <?php
-/**
- * PROJETO 06 — API de Notas
- * POST   /backend/api/notas.php              -> lança nota { aluno_id, disciplina, nota }
- * DELETE /backend/api/notas.php?id=12        -> remove uma nota lançada
- */
+
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, DELETE, OPTIONS');

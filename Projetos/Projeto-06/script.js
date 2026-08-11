@@ -1,17 +1,8 @@
-/* =========================================================
-   PROJETO 06 — PLATAFORMA DE GESTÃO ACADÊMICA
-   Front-end de demonstração: os dados abaixo simulam o que,
-   em produção, viria da API REST em PHP/MySQL (ver backend/).
-   Toda a lógica de CRUD e cálculo de médias está aqui em JS
-   puro, no mesmo padrão usado nos demais scripts do portfólio.
-   ========================================================= */
 
 (() => {
     'use strict';
 
-    /* ---------------------------------------------------------
-       DADOS (mock — em produção viriam de backend/api/*.php)
-       --------------------------------------------------------- */
+   
     let cursos = [
         { id: 1, nome: 'Desenvolvimento Web Full Stack', cargaHoraria: 180, professor: 'Profa. Camila Reis' },
         { id: 2, nome: 'Banco de Dados Aplicado', cargaHoraria: 120, professor: 'Prof. Eduardo Lima' },
@@ -42,9 +33,7 @@
     let alunoSelecionadoBoletim = alunos[0]?.id ?? null;
     let alunoEmEdicao = null;
 
-    /* ---------------------------------------------------------
-       HELPERS
-       --------------------------------------------------------- */
+    
     const $ = (sel) => document.querySelector(sel);
     const $$ = (sel) => document.querySelectorAll(sel);
 
@@ -71,9 +60,7 @@
         }[c]));
     }
 
-    /* ---------------------------------------------------------
-       TEMA (mesmo padrão do portfólio principal)
-       --------------------------------------------------------- */
+    
     function initThemeToggle() {
         const toggleBtn = $('#themeToggle');
         if (!toggleBtn) return;
@@ -94,9 +81,7 @@
         }
     }
 
-    /* ---------------------------------------------------------
-       ABAS
-       --------------------------------------------------------- */
+    
     function initTabs() {
         $$('.tab-btn').forEach((btn) => {
             btn.addEventListener('click', () => {
@@ -110,9 +95,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       DASHBOARD
-       --------------------------------------------------------- */
+    
     function renderDashboard() {
         const medias = alunos.map((a) => media(a.notas));
         const mediaGeral = medias.length ? medias.reduce((a, b) => a + b, 0) / medias.length : 0;
@@ -125,9 +108,7 @@
         $('#statAprovacao').textContent = taxa + '%';
     }
 
-    /* ---------------------------------------------------------
-       ALUNOS
-       --------------------------------------------------------- */
+    
     function renderAlunos() {
         const termo = ($('#buscaAluno').value || '').toLowerCase().trim();
         const corpo = $('#corpoTabelaAlunos');
@@ -228,9 +209,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       CURSOS
-       --------------------------------------------------------- */
+    
     function renderCursos() {
         $('#gradeCursos').innerHTML = cursos.map((c) => {
             const matriculados = alunos.filter((a) => a.cursoId === c.id).length;
@@ -266,9 +245,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       BOLETIM
-       --------------------------------------------------------- */
+    
     function atualizarSelectAlunoBoletim() {
         const select = $('#selectAlunoBoletim');
         const atual = select.value;
@@ -361,9 +338,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       RELATÓRIO (CSV) — espelha o que o script Python gera
-       --------------------------------------------------------- */
+   
     function initRelatorio() {
         $('#btnGerarRelatorio').addEventListener('click', () => {
             const linhas = [['Nome', 'E-mail', 'Curso', 'Media', 'Situacao', 'Status']];
@@ -387,9 +362,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       MODAIS (genérico)
-       --------------------------------------------------------- */
+    
     function abrirModal(id) { $('#' + id).hidden = false; }
     function fecharModal(id) { $('#' + id).hidden = true; }
 
@@ -407,9 +380,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       INIT
-       --------------------------------------------------------- */
+   
     document.addEventListener('DOMContentLoaded', () => {
         initThemeToggle();
         initTabs();
